@@ -124,10 +124,12 @@ body {
 
 .c-logo {
     position: fixed;
+    /* right: 24px; */
     left: 24px;
     bottom: 24px;
+    width: calc(100% / (5*2));
 }
 
 .c-logo__image {
-    width: calc(100% / 5);
+    width: 100%;
 }
