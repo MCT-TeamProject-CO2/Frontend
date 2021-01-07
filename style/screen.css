@@ -1,6 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+:root {
+    --global-color-light: #ffffff;
+    --global-color-x-light: #e5e5e5;
+    --global-color-xx-light: #707070;
+    --global-color-dark: #090724;
+    --global-color-x-dark: #181b22;
+    --global-color-blue-howest: #44c8f5;
+    --global-color-blue-howest-opacity: #44c8f533;
+    --global-color-gradient: linear-gradient(to bottom left, #18b6e6, #269acb);
+}
+
 * {
-    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -38,7 +49,8 @@ body {
 .c-art {
     width: 100%;
     height: 100%;
-    background-image: url('../img/png/art.png');
+    background-image: url("../img/png/art.png");
+    /* filter: hue-rotate(60deg) brightness(0.7); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -52,7 +64,7 @@ body {
 .c-title {
     margin-bottom: 64px;
     font-size: 32px;
-    color: #090724;
+    color: var(--global-color-x-dark);
     font-weight: 300;
     margin-left: 8px;
 }
@@ -74,19 +86,31 @@ body {
 }
 
 .c-input__field {
-    background-color: white;
+    --local-color-border: var(--global-color-xx-light);
+    background: none;
     border-radius: 10px;
+    border: 1px solid var(--local-color-border);
     line-height: 16px;
     height: 48px;
-    box-shadow: 0 3px 6px 2px rgba(0, 0, 0, 0.1);
-    border: none;
     padding-left: 16px;
 }
 
+.c-input__field:hover {
+    --local-color-border: var(--global-color-blue-howest);
+    box-shadow: 0 0 0 3px var(--global-color-blue-howest-opacity);
+}
+
+.c-input__field:focus,
+.c-input__field:active {
+    outline: none;
+    --local-color-border: var(--global-color-blue-howest);
+}
+
 .c-button--login {
+    --local-color-background: var(--global-color-gradient);
     margin-top: 16px;
     height: 56px;
-    background: linear-gradient(to bottom left, #00C0F9, #269ACB);
+    background: var(--local-color-background);
     border-radius: 10px;
     color: white;
     font-weight: 700;
@@ -94,13 +118,15 @@ body {
 }
 
 .c-button--microsoft {
+    --local-color-border: #8c8c8c;
+    --local-color-background: white;
     height: 41px;
-    background-color: white;
-    border: 1px solid #8C8C8C;
+    background-color: var(--local-color-background);
+    border: 1px solid var(--local-color-border);
     padding: 0 12px;
     display: flex;
     align-items: center;
-    font-family: 'Segoe UI';
+    font-family: "Segoe UI";
     font-weight: 600;
     font-size: 15px;
     line-height: 15px;
@@ -110,24 +136,105 @@ body {
 }
 
 .c-button--microsoft::before {
-    content: url('../img/svg/microsoft-logo.svg');
+    content: url("../img/svg/microsoft-logo.svg");
 }
 
 .c-button--microsoft:hover {
-    background-color: #2f2f2f;
+    --local-color-background: #2f2f2f;
     color: white;
 }
 
 .c-button--login:hover {
-    background: #00C0F9;
+    --local-color-background: var(--global-color-blue-howest);
+}
+
+.c-button--login:active,
+.c-button--login:focus {
+    outline: none;
+    --local-color-background: var(--global-color-blue-howest);
+    box-shadow: 0 0 0 3px var(--global-color-blue-howest-opacity);
 }
 
 .c-logo {
     position: fixed;
     left: 24px;
     bottom: 24px;
+    width: calc(100% / (5 * 2));
 }
 
 .c-logo__image {
-    width: calc(100% / 5);
+    width: 100%;
+}
+
+@media(max-width: 1024px) {
+    .c-login {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .c-logo {
+        top: 24px;
+        filter: grayscale(1) brightness(255);
+        width: calc(100% / 5);
+    }
+    .c-grid {
+        grid-template-columns: auto;
+        grid-template-rows: 1fr 3fr;
+    }
+    .c-login {
+        grid-row: 2;
+    }
+    .c-art {
+        grid-row: 1;
+    }
+}
+
+@media (max-width: 425px) {
+    .c-login {
+        width: 90%;
+    }
+    .c-logo {
+        width: calc(100% / 5 * 2);
+    }
+    .c-grid {
+        grid-template-rows: 1fr 6fr;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--global-color-x-dark);
+        color: white;
+    }
+    .c-art {
+        filter: hue-rotate(20deg);
+    }
+    .c-title {
+        color: white;
+    }
+    .c-input>label {
+        color: var(--global-color-x-light);
+    }
+    .c-input__field {
+        color: white;
+    }
+    .c-input__field:active,
+    .c-input__field:focus {
+        --local-color-border: var(--global-color-blue-howest);
+        box-shadow: 0 0 1px 1px var(--global-color-blue-howest);
+    }
+    .c-input__field:hover {
+        box-shadow: 0 0 0 1px var(--global-color-blue-howest);
+    }
+    .c-button--microsoft {
+        --local-color-background: #2f2f2f;
+        --local-color-border: black;
+        color: white;
+    }
+    .c-button--microsoft:hover {
+        --local-color-background: white;
+        --local-color-border: #8c8c8c;
+        color: #5e5e5e;
+    }
 }
