@@ -3,21 +3,257 @@
     --global-color-light: #ffffff;
     --global-color-x-light: #e5e5e5;
     --global-color-xx-light: #707070;
-    --global-color-dark: #090724;
+    --global-color-dark: #1C1C1D;
     --global-color-x-dark: #181b22;
     --global-color-blue-howest: #44c8f5;
     --global-color-blue-howest-opacity: #44c8f533;
+    --global-color-alert: #ee4949;
     --global-color-gradient: linear-gradient(to bottom left, #18b6e6, #269acb);
 }
 
-* {
+
+/*
+    Generic: Page
+    ---
+    Global page styles + universal box-sizing:
+*/
+
+html {
+    /* font-size: 15px; */
+    font-size: 93.75%;
+    /* = 15px in case of 16px default font-size */
+    line-height: 1.6666667em;
+    /* = 25px */
+    font-family: "Source Sans Pro", Helvetica, arial, sans-serif;
+    color: var(--global-color-neutral-dark);
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--global-color-neutral-xxxx-light);
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+
+/*
+* Remove text-shadow in selection highlight:
+* https://twitter.com/miketaylr/status/12228805301
+*
+* Customize the background color to match your design.
+*/
+
+::-moz-selection {
+    background: var(--global-color-alpha);
+    color: white;
+    text-shadow: none;
+}
+
+::selection {
+    background: var(--global-color-alpha);
+    color: white;
+    text-shadow: none;
+}
+
+
+/*------------------------------------*\
+#Elements
+\*------------------------------------*/
+
+
+/*
+Elements: Images
+---
+Default markup for images to make them responsive
+*/
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+}
+
+
+/*
+Elements: typography
+---
+Default markup for typographic elements
+*/
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+}
+
+h1 {
+    /* font-size: 36px; */
+    font-size: 2.4rem;
+    line-height: calc(var(--global-baseline) * 10);
+    margin: 0 0 var(--global-whitespace-md);
+}
+
+h2 {
+    /* font-size: 28px; */
+    /* font-size: 1.8666666667rem; */
+    font-size: calc(28rem / var(--global-root-font-size));
+    font-weight: normal;
+    line-height: calc(var(--global-baseline) * 8);
+    margin: 0 0 var(--global-whitespace-lg);
+}
+
+h3 {
+    /* font-size: 18px; */
+    font-size: 1.2rem;
+    line-height: calc(var(--global-baseline) * 6);
+    margin: 0 0 var(--global-whitespace-md);
+}
+
+h4,
+h5,
+h6 {
+    /* font-size: 15px; */
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: calc(var(--global-baseline) * 5);
+    margin: 0 0 var(--global-whitespace-md);
+}
+
+p,
+ol,
+ul,
+dl,
+table,
+address,
+figure {
+    margin: 0 0 var(--global-whitespace-md);
+}
+
+ul,
+ol {
+    padding-left: 24px;
+}
+
+li ul,
+li ol {
+    margin-bottom: 0;
+}
+
+blockquote {
+    font-style: normal;
+    font-size: 23px;
+    line-height: calc(var(--global-baseline) * 5);
+    margin: 0 0 var(--global-whitespace-md);
+}
+
+blockquote * {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+figcaption {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 8px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: LightGrey;
+    margin: 0 0 var(--global-whitespace-md);
+}
+
+a {
+    transition: all var(--global-transition-alpha);
+    color: var(--global-color-beta);
+    outline-color: var(--global-color-beta);
+    outline-width: medium;
+    outline-offset: 2px;
+}
+
+a:visited,
+a:active {
+    color: var(--global-color-beta);
+}
+
+a:hover,
+a:focus {
+    color: var(--global-color-alpha);
+}
+
+label,
+input {
+    display: block;
+}
+
+select {
+    width: 100%;
+}
+
+input::placeholder {
+    color: var(--global-color-neutral-light);
 }
 
 body {
     height: 100vh;
     width: 100vw;
 }
+
+
+/*------------------------------------*\
+#OBJECTS
+\*------------------------------------*/
+
+
+/*
+    Objects: Row
+    ---
+    Creates a horizontal row that stretches the viewport and adds padding around children
+*/
+
+.o-row {
+    position: relative;
+    padding: var(--global-whitespace-lg) var(--global-whitespace-lg) var(--global-baseline);
+}
+
+
+/*
+    Objects: Container
+    ---
+    Creates a horizontal container that sets de global max-width
+*/
+
+.o-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 78em;
+    /* 78 * 15px = 1170 */
+    width: 100%;
+}
+
+
+/*
+    Objects: List
+    ---
+    Small reusable object to remove default list styling from lists
+*/
+
+.o-list {
+    list-style: none;
+    padding: 0;
+}
+
+
+/*
+    Object: Button reset
+    ---
+    Small button reset object
+*/
 
 .o-button-reset {
     border: none;
@@ -39,11 +275,43 @@ body {
     cursor: pointer;
 }
 
-.c-grid {
+
+/*
+    Object: Hide accessible
+    ---
+    Accessibly hide any element
+*/
+
+.o-hide-accessible {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+
+/*------------------------------------*\
+#COMPONENTS
+\*------------------------------------*/
+
+
+/* Grids */
+
+.c-grid--login {
     display: grid;
     height: 100%;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+}
+
+.c-grid--dashboard {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 104px auto 512px;
 }
 
 .c-art {
@@ -62,7 +330,7 @@ body {
 }
 
 .c-title {
-    margin-bottom: 64px;
+    margin-bottom: 16px;
     font-size: 32px;
     color: var(--global-color-x-dark);
     font-weight: 300;
@@ -70,6 +338,7 @@ body {
 }
 
 .c-form {
+    margin-top: 64px;
     display: flex;
     flex-direction: column;
     row-gap: 24px;
@@ -178,7 +447,7 @@ body {
         filter: grayscale(1) brightness(255);
         width: calc(100% / 5);
     }
-    .c-grid {
+    .c-grid--login {
         grid-template-columns: auto;
         grid-template-rows: 1fr 3fr;
     }
@@ -197,18 +466,128 @@ body {
     .c-logo {
         width: calc(100% / 5 * 2);
     }
-    .c-grid {
+    .c-grid--login {
         grid-template-rows: 1fr 6fr;
     }
+}
+
+
+/*
+    Component: App
+    ---
+    Global app component
+*/
+
+.c-app {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: min-content 4fr 1fr;
+}
+
+.c-app__logo {
+    background-color: var(--global-color-neutral-xx-dark);
+    padding: 0 var(--global-whitespace-lg);
+    height: var(--c-app__topbar-height);
+    display: flex;
+    align-items: center;
+}
+
+.c-app__main {
+    min-width: 100%;
+}
+
+
+/*
+Component: Main Navigation
+---
+Main navigation component
+*/
+
+.c-main-nav {
+    height: 100%;
+    width: 64px;
+    padding: 16px 0;
+    display: grid;
+    align-items: end;
+    justify-items: center;
+    grid-template-rows: repeat(2, 50%);
+    grid-template-columns: 100%;
+    transition: width .1s ease-out;
+    background-color: var(--global-color-dark);
+}
+
+.c-main-nav:hover {
+    width: 12rem;
+    left: 0;
+    height: 100vh;
+}
+
+.c-main-nav:hover .c-main-nav__text {
+    display: inline;
+}
+
+.c-main-nav:hover .c-main-nav__item {
+    justify-content: flex-start;
+    padding-left: 1rem;
+}
+
+.c-main-nav__list {
+    width: 100%;
+}
+
+.c-main-nav__item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.c-main-nav__item+.c-main-nav__item {
+    margin-top: 32px;
+}
+
+.c-main-nav__item--current {
+    background-color: white;
+    color: var(--global-color-dark);
+    padding: 8px 0;
+}
+
+.c-main-nav__item--current .c-main-nav__text {
+    color: var(--global-color-dark);
+}
+
+.c-main-nav__item--current .c-main-nav__icon {
+    fill: var(--global-color-dark);
+}
+
+.c-main-nav__link {
+    text-decoration: none;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    column-gap: 16px;
+}
+
+.c-main-nav__icon {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--global-color-blue-howest);
+}
+
+.c-main-nav__icon--logout {
+    fill: var(--global-color-alert);
+}
+
+.c-main-nav__text {
+    display: none;
+    color: var(--global-color-blue-howest);
+    font-size: 16px;
+    font-weight: 400;
 }
 
 @media (prefers-color-scheme: dark) {
     body {
         background-color: var(--global-color-x-dark);
         color: white;
-    }
-    .c-art {
-        filter: hue-rotate(20deg);
     }
     .c-title {
         color: white;
