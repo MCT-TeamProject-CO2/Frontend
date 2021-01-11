@@ -10,8 +10,6 @@
     --global-color-blue-howest-opacity: #44c8f533;
     --global-color-dark-blue: #124257;
     --global-color-alert: #ee4949;
-    --global-color-selection-bg: #124257;
-    --global-color-selection-color: #ffffff;
     --global-color-gradient: linear-gradient(to bottom left, #18b6e6, #269acb);
     --global-color-background: var(--global-color-light);
     --global-color-accent: var(--global-color-x-dark);
@@ -58,8 +56,8 @@ html {
 }
 
 ::selection {
-    background-color: var(--global-color-selection-bg);
-    color: var(--global-color-selection-color);
+    background-color: var(--global-color-accent);
+    color: var(--global-color-background);
     text-shadow: none;
 }
 
@@ -725,7 +723,7 @@ Main navigation component
         color: white;
     }
     .c-input>label {
-        color: var(--global-color-xx-light);
+        color: var(--global-color-x-light);
     }
     .c-input__field {
         color: white;
