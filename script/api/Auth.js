@@ -39,7 +39,11 @@ export default class Auth {
      * @param {string} code 
      */
     async oauth2(code) {
-        const res = await this.api.post(this.base + '/oauth2', { code });
+        const res = await this.api.post(
+            this.base + '/oauth2',
+            { code },
+            { redirect: location.origin }
+        );
 
         const json = await res.json();
         if (res.ok) {
