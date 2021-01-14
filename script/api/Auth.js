@@ -39,7 +39,11 @@ export default class Auth {
      * @param {string} code 
      */
     async oauth2(code) {
-        const res = await this.api.post(this.base + '/oauth2', { code });
+        const res = await this.api.post(
+            this.base + '/oauth2',
+            { code },
+            { redirect: location.origin }
+        );
 
         const json = await res.json();
         if (res.ok) {
@@ -47,7 +51,15 @@ export default class Auth {
 
             return [true];
         }
-        return [false, json];
+        
+        switch (res.status) {
+            case 404:
+                return [false, "Could not find a user matching the Microsoft account you tried to sign-in with, try again and check if you're using the correct account."];
+        
+            case 406:
+                return [false, "An error occured when communicating with Microsoft's services to sign you in."];
+        }
+        return [false, "Unknown error occurred, try again later and check if the problem persists."];
     }
 
     /**

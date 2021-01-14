@@ -12,6 +12,10 @@ export default class Router {
         return this._active;
     }
 
+    get search() {
+        return new URLSearchParams(location.search);
+    }
+
     /**
      * @private
      * @param {string} path
@@ -40,6 +44,8 @@ export default class Router {
     }
 
     async navigate(path) {
+        document.title = 'AirMonitor | ' + path;
+
         const contents = await this.prepare(path);
 
         this.app.body.innerHTML = contents;
