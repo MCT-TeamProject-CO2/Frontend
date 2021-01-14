@@ -368,6 +368,8 @@ body {
     flex-wrap: nowrap;
     row-gap: 0;
     align-items: center;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
 }
 
 .c-input>label {
@@ -398,8 +400,13 @@ body {
 .c-input--search .c-input__field {
     width: 100%;
     height: 3rem;
-    margin: 1rem 0;
     border-radius: 10px 0 0 10px;
+}
+
+.c-input--search .c-input__field:hover,
+.c-input--search .c-input__field:active,
+.c-input--search .c-input__field:focus {
+    box-shadow: none;
 }
 
 .c-button {
@@ -413,10 +420,11 @@ body {
 .c-button--search {
     height: 3rem;
     width: 3rem;
+    border-radius: 0 10px 10px 0;
 }
 
 .c-search__icon {
-    fill: var(--global-color-accent);
+    fill: white;
 }
 
 .c-button--login {
@@ -451,12 +459,12 @@ body {
     color: white;
 }
 
-.c-button--login:hover {
+.c-button:hover {
     --local-color-background: var(--global-color-blue-howest);
 }
 
-.c-button--login:active,
-.c-button--login:focus {
+.c-button:active,
+.c-button:focus {
     outline: none;
     --local-color-background: var(--global-color-blue-howest);
     box-shadow: 0 0 0 3px var(--global-color-blue-howest-opacity);
@@ -495,9 +503,10 @@ body {
 
 .c-app__main {
     max-height: 100vh;
+    min-height: 100vh;
     margin-left: 4rem;
     display: grid;
-    padding: 1rem;
+    padding: 2rem;
     grid-template-columns: auto min-content;
     grid-template-rows: 100%;
     gap: 2rem;
@@ -664,15 +673,15 @@ Main navigation component
     align-items: center;
 }
 
-.c-card__title--alert::after {
+.room-has-alert .c-card__title::after {
     content: url("../img/svg/error.svg");
     /* margin-top: 8px; */
-    padding: 4px 4px;
+    /* padding: 8px 8px;
     background-color: var(--global-color-light);
-    border-radius: 15px;
+    border-radius: 45px; */
 }
 
-.c-card--alert {
+.c-card--room {
     cursor: pointer;
 }
 
@@ -723,6 +732,7 @@ Main navigation component
     border: 1px solid var(--global-color-xx-light);
     border-radius: 10px;
     overflow: none;
+    overflow: hidden;
 }
 
 .c-floor-map__canvas {
