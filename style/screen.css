@@ -490,6 +490,30 @@ body {
     padding: 0 2rem;
 }
 
+/*
+Component: Popup
+---
+Global
+*/
+.c-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.325);
+}
+.c-popup .c-card {
+    position: relative;
+    top: 50%;
+
+    margin: 0 auto;
+    
+    transform: translateY(-50%);
+}
+
 
 /*
 Component: Main Navigation
