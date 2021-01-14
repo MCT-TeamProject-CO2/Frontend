@@ -25,6 +25,10 @@ export default class Popup extends BaseAlert {
         return this._e;
     }
 
+    get type() {
+        return 'popup';
+    }
+
     close() {
         this.alerts.remove(this.id);
 
@@ -46,5 +50,8 @@ export default class Popup extends BaseAlert {
         </div>`);
 
         this._e = document.getElementById(this.id);
+
+        if (this.closable)
+            this._e.addEventListener('click', this.close.bind(this));
     }
 }
