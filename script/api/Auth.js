@@ -71,7 +71,7 @@ export default class Auth {
      * Revokes the sessionId server side and clears the sessionStorage locally
      * @param {string} sessionId 
      */
-    async revoke(sessionId) {
+    async revoke(sessionId = this.api.getSession()) {
         const res = await this.api.delete(this.base + '/revoke', { sessionId });
 
         sessionStorage.clear();
