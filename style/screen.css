@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap');
 :root {
     --global-color-light: #ffffff;
     --global-color-x-light: #e5e5e5;
@@ -28,7 +28,7 @@ html {
     font-size: 16px;
     line-height: 1.6666667em;
     /* = 25px */
-    font-family: "Source Sans Pro", Helvetica, arial, sans-serif;
+    font-family: "Open Sans", Helvetica, arial, sans-serif;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -38,7 +38,7 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -363,6 +363,13 @@ body {
     row-gap: 8px;
 }
 
+.c-input--search {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    row-gap: 0;
+    align-items: center;
+}
+
 .c-input>label {
     margin-left: 8px;
 }
@@ -388,15 +395,33 @@ body {
     --local-color-border: var(--global-color-blue-howest);
 }
 
-.c-button--login {
+.c-input--search .c-input__field {
+    width: 100%;
+    height: 3rem;
+    margin: 1rem 0;
+    border-radius: 10px 0 0 10px;
+}
+
+.c-button {
     --local-color-background: var(--global-color-gradient);
-    margin-top: 16px;
-    height: 56px;
     background: var(--local-color-background);
     border-radius: 10px;
     color: white;
     font-weight: 700;
-    font-size: 16px;
+}
+
+.c-button--search {
+    height: 3rem;
+    width: 3rem;
+}
+
+.c-search__icon {
+    fill: var(--global-color-accent);
+}
+
+.c-button--login {
+    margin-top: 1rem;
+    height: 3.5rem;
 }
 
 .c-button--microsoft {
@@ -458,7 +483,7 @@ body {
 .c-app {
     position: fixed;
     width: 100vw;
-    max-height: 100vh;
+    height: 100vh;
     top: 0;
     left: 0;
 }
@@ -471,8 +496,8 @@ body {
 .c-app__main {
     max-height: 100vh;
     margin-left: 4rem;
-    padding: 2rem;
     display: grid;
+    padding: 1rem;
     grid-template-columns: auto min-content;
     grid-template-rows: 100%;
     gap: 2rem;
@@ -482,35 +507,40 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
+    max-height: 100%;
+}
+
+.c-app__section {
+    max-height: inherit;
 }
 
 .c-app__section-content {
+    max-height: inherit;
     display: flex;
     flex-wrap: wrap;
-    padding: 0 2rem;
+    padding-right: 2rem;
 }
+
 
 /*
 Component: Popup
 ---
 Global
 */
+
 .c-popup {
     position: fixed;
     top: 0;
     left: 0;
-
     width: 100vw;
     height: 100vh;
-
     background-color: rgba(0, 0, 0, 0.325);
 }
+
 .c-popup .c-card {
     position: relative;
     top: 50%;
-
     margin: 0 auto;
-    
     transform: translateY(-50%);
 }
 
@@ -618,7 +648,7 @@ Main navigation component
     border-radius: var(--local-border-radius);
     box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.1);
     min-width: min-content;
-    margin: 1rem;
+    margin: 1rem 0.5rem;
 }
 
 .c-card__title {
@@ -637,7 +667,7 @@ Main navigation component
 .c-card__title--alert::after {
     content: url("../img/svg/error.svg");
     /* margin-top: 8px; */
-    padding: 0 4px;
+    padding: 4px 4px;
     background-color: var(--global-color-light);
     border-radius: 15px;
 }
@@ -684,6 +714,20 @@ Main navigation component
     display: flex;
     align-items: center;
     margin-right: 0.5rem;
+}
+
+.c-floor-map {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid var(--global-color-xx-light);
+    border-radius: 10px;
+    overflow: none;
+}
+
+.c-floor-map__canvas {
+    width: 100%;
+    background-color: white;
 }
 
 .has-alert .c-floor__btn-text::after {

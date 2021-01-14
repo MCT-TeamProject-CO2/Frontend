@@ -2,7 +2,7 @@ export default class Home {
     constructor(app) {
         this.app = app;
     }
-    
+
     domLookUp() {
         const btnLogout = document.querySelector('.js-btn-logout');
         btnLogout.addEventListener('click', this.logout.bind(this));
