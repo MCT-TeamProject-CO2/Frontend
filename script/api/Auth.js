@@ -41,8 +41,7 @@ export default class Auth {
     async oauth2(code) {
         const res = await this.api.post(
             this.base + '/oauth2',
-            { code },
-            { redirect: location.origin }
+            { code, uri: location.origin }
         );
 
         const json = await res.json();
@@ -53,10 +52,16 @@ export default class Auth {
         }
         
         switch (res.status) {
+            case 400:
+                return [false, "The request body to log you in was malformed."];
+
             case 404:
                 return [false, "Could not find a user matching the Microsoft account you tried to sign-in with, try again and check if you're using the correct account."];
         
             case 406:
+                if (json.data.error_codes && json.data.error_codes[0] == 65001)
+                    return [false, "The administrator of your account has not enabled sign-in on this application."];
+
                 return [false, "An error occured when communicating with Microsoft's services to sign you in."];
         }
         return [false, "Unknown error occurred, try again later and check if the problem persists."];
