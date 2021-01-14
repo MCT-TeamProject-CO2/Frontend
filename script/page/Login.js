@@ -54,7 +54,7 @@ export default class Login {
                 if (success)
                     this.app.router.navigate('home');
                 else
-                    this.app.alerts.pushPopup('Sign-in Failed', data, true);
+                    this.app.alerts.pushPopup('Sign-in failure', data, true);
             });
         }
 
