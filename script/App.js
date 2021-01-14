@@ -1,3 +1,4 @@
+import Alerts from './Alerts.js'
 import API from './api/API.js'
 import Router from './Router.js'
 
@@ -5,6 +6,7 @@ import Home from './page/Home.js'
 import Login from './page/Login.js'
 
 export default class AppRoot {
+    _alerts = new Alerts();
     _api = new API(this);
     _router = new Router(this);
     
@@ -23,6 +25,13 @@ export default class AppRoot {
      */
     get api() {
         return this._api;
+    }
+
+    /**
+     * @returns {Alerts}
+     */
+    get alerts() {
+        return this._alerts;
     }
 
     /**
