@@ -54,7 +54,18 @@ export default class AppRoot {
     }
 
     async _checkSession() {
+        this._timeout = setTimeout(() => {
+            this.alerts.pushPopup('Communicating', 'Communication with the backend is taking longer than expected...', false);
+
+            this._timeout = setTimeout(() => {
+                this.alerts.pushPopup('Communication Error', 'Could not communicate with backend.<br>Try again later...', false);
+            }, 5e3);
+        }, 500);
+
         this._requireLogin = !await this._api.auth.valid();
+
+        clearTimeout(this._timeout);
+
         this.router.prepare(this._requireLogin ? 'login' : 'home');
         this._ready();
     }
