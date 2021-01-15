@@ -55,10 +55,10 @@ export default class AppRoot {
 
     async _checkSession() {
         this._timeout = setTimeout(() => {
-            this.alerts.pushPopup('Communicating', 'Communication with the backend is taking longer than expected...', false);
+            this.alerts.pushPopup('Communicating', 'Communication with the server is taking longer than expected...', false);
 
             this._timeout = setTimeout(() => {
-                this.alerts.pushPopup('Communication Error', 'Could not communicate with backend.<br>Try again later...', false);
+                this.alerts.pushPopup('Communication Error', 'Could not communicate with server.<br>Try again later...', false);
             }, 5e3);
         }, 500);
 
