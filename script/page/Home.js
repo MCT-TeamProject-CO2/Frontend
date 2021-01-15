@@ -19,6 +19,15 @@ export default class Home {
         );
     }
 
+    loadLocations() {
+        
+    }
+
+    logout(e) {
+        this.app.api.auth.revoke();
+        this.app.router.navigate('login');
+    }
+
     navItemClicked(e) {
         const el = e.currentTarget;
 
@@ -36,12 +45,9 @@ export default class Home {
         }
     }
 
-    logout(e) {
-        this.app.api.auth.revoke();
-        this.app.router.navigate('login');
-    }
-
     run() {
         this.domLookUp();
+
+        this.loadLocations();
     }
 }
