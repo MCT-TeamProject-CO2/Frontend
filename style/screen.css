@@ -368,6 +368,7 @@ body {
     margin: 0;
     row-gap: 0;
     margin-left: 1rem;
+    max-height: 100%;
 }
 
 .c-form-field--option {
@@ -447,6 +448,7 @@ body {
     color: white;
     font-weight: 700;
     height: 3rem;
+    min-height: 3rem;
 }
 
 .c-button--search {
@@ -557,7 +559,8 @@ body {
 }
 
 .c-app__main--settings {
-    grid-template-columns: repeat(2, min-content);
+    grid-template-columns: repeat(2, max-content);
+    max-height: calc(100% - 2rem);
 }
 
 .c-app__main-section {
@@ -568,7 +571,8 @@ body {
 }
 
 .c-app__main-section--settings {
-    width: 40rem;
+    min-width: 25rem;
+    overflow: auto;
 }
 
 .c-app__section {
@@ -812,6 +816,12 @@ Main navigation component
     margin-left: 1rem;
 }
 
+.c-form-section--flex {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
 .c-form-section+.c-title {
     margin-top: 2rem;
 }
@@ -890,6 +900,10 @@ Main navigation component
         grid-template-rows: min-content 1fr;
         grid-template-columns: 100%;
     }
+    .c-app__main--settings {
+        grid-template-rows: 100%;
+        grid-template-columns: repeat(2, max-content);
+    }
     .c-app__section-content {
         width: 100%;
     }
@@ -926,6 +940,16 @@ Main navigation component
     }
     .c-art {
         grid-row: 1;
+    }
+    .c-app__main--settings {
+        grid-template-columns: 100%;
+        justify-items: center;
+        grid-template-rows: repeat(2, max-content);
+        overflow: auto;
+    }
+    .c-app__main-section--settings {
+        width: min-content;
+        padding: 2rem 0;
     }
 }
 
@@ -976,6 +1000,31 @@ Main navigation component
     }
     .c-measurements__item {
         min-width: 12rem;
+    }
+    .c-app__main--settings {
+        display: block;
+        position: absolute;
+        padding-top: 0;
+        width: 100%;
+        min-height: max-content;
+    }
+    .c-app__main-section--settings {
+        overflow: hidden;
+        width: 100%;
+        min-width: 0;
+        height: min-content;
+        padding: 0;
+        padding-right: 1rem;
+        margin: 2rem 0;
+    }
+    .c-app__main-section--settings+.c-app__main-section--settings {
+        margin-top: 2rem;
+    }
+}
+
+@media(max-width: 375px) {
+    .c-app__main--settings {
+        padding-bottom: 1rem;
     }
 }
 
