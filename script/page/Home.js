@@ -1,7 +1,7 @@
 import InnerHome from './InnerHome.js'
 
 export default class Home {
-    _active = 'home';
+    _active;
 
     constructor(app) {
         this.app = app;
@@ -38,6 +38,8 @@ export default class Home {
 
         switch (this._active) {
             case 'logout':
+                e.preventDefault();
+
                 history.pushState({}, "", "/");
 
                 return this.logout();

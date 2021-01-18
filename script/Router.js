@@ -13,6 +13,10 @@ export default class Router {
         return this._active;
     }
 
+    get activeInner() {
+        return this._innerActive;
+    }
+
     get search() {
         return new URLSearchParams(location.search);
     }
@@ -52,6 +56,7 @@ export default class Router {
         this.app.body.innerHTML = contents;
 
         const instance = this._handlers.get(path);
+        this._innerActive = undefined;
         if (instance) instance.run();
         this._active = instance;
     }
@@ -62,12 +67,23 @@ export default class Router {
         const contents = await this.prepare('inner/' + path);
 
         const inner = document.querySelector('.c-app__main');
-        if (!inner) console.log('Unable to navigate inner, is the home content loaded?');
+        if (!inner) {
+            window.location = '/#/' + path;
+            location.reload();
+
+            console.log('Unable to navigate inner, is the home content loaded?');
+
+            return;
+        }
         inner.outerHTML = contents;
+
+        if (this._el) this._el.classList.remove('c-main-nav__item--current');
+        this._el = document.querySelector(`[href="/#/${path}"]`)?.parentElement;
+        if (this._el) this._el.classList.add('c-main-nav__item--current');
 
         const instance = this._innerHandlers.get(path);
         if (instance) instance.run();
-        this._active = instance;
+        this._innerActive = instance;
     }
 
     /**
