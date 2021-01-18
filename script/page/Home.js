@@ -1,8 +1,13 @@
+import InnerHome from './InnerHome.js'
+
 export default class Home {
     _active = 'home';
 
     constructor(app) {
         this.app = app;
+
+        this.app.router.registerInner('home', new InnerHome(app));
+        //this.app.router.registerInner('settings', new InnerSettings(app));
     }
 
     get active() {
@@ -19,10 +24,6 @@ export default class Home {
         );
     }
 
-    loadLocations() {
-        
-    }
-
     logout(e) {
         this.app.api.auth.revoke();
         this.app.router.navigate('login');
@@ -37,9 +38,11 @@ export default class Home {
 
         switch (this._active) {
             case 'logout':
-                return this.logout();
+                history.pushState({}, "", "/");
 
-            case 'home':
+                return this.logout();
+            default:
+                this.app.router.navigateInner(this._active);
 
                 break;
         }
@@ -48,6 +51,8 @@ export default class Home {
     run() {
         this.domLookUp();
 
-        this.loadLocations();
+        const route = location.hash.split('/')[1];
+
+        this.app.router.navigateInner(route ? route : 'home');
     }
 }
