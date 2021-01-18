@@ -41,7 +41,7 @@ export default class Locations {
         return { succes: false, data: null };
     }
 
-    update(query, update) {
+    async update(query, update) {
         const res = await this.api.put(this.base, {
             query,
             update
