@@ -97,6 +97,29 @@ export const post = (url, body = '', searchParams = {}, headers = {}, options = 
     return fetch(url, options);
 };
 
+/**
+ * Creates a PUT request and returns the response from fetch
+ * @param {string|URL} url 
+ * @param {string|Object} [body = ''] 
+ * @param {URLSearchParams|Object} [searchParams = {}] 
+ * @param {Object} [headers = {}] 
+ * @param {Object} [options = {}] 
+ */
+export const put = (url, body = '', searchParams = {}, headers = {}, options = {}) => {
+    url = getURL(url);
+    urlAddSearchParams(url, searchParams);
+
+    body = typeof body === 'string' ? body : JSON.stringify(body);
+
+    merge(options, {
+        headers,
+        method: 'PUT',
+        body
+    });
+
+    return fetch(url, options);
+};
+
 export default {
     delete: deleteReq,
     get,
