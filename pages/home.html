@@ -2,8 +2,8 @@
     <div class="c-app__sidebar">
         <nav class="c-main-nav">
             <ul class="o-list c-main-nav__list">
-                <li class="c-main-nav__item c-main-nav__item--current" data-page-type="home">
-                    <a class="c-main-nav__link" href="/">
+                <li class="c-main-nav__item" data-page-type="home">
+                    <a class="c-main-nav__link" href="/#/home">
                         <svg class="c-main-nav__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M10,20V14h4v6h5V12h3L12,3,2,12H5v8Z"/><path d="M0,0H24V24H0Z" fill="none"/>
                             </svg>
@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li class="c-main-nav__item" data-page-type="stats">
-                    <a class="c-main-nav__link" href="#/stats">
+                    <a class="c-main-nav__link" href="/#/stats">
                         <svg class="c-main-nav__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <rect width="24" height="24" fill="none"/>
                                 <path d="M14.06,9.94,12,9l2.06-.94L15,6l.94,2.06L18,9l-2.06.94L15,12ZM4,14l.94-2.06L7,11l-2.06-.94L4,8l-.94,2.06L1,11l2.06.94ZM8.5,9,9.59,6.59,12,5.5,9.59,4.41,8.5,2,7.41,4.41,5,5.5,7.41,6.59Zm-4,11.5,6-6.01,4,4L23,8.93,21.59,7.52,14.5,15.49l-4-4L3,19Z"/>
@@ -22,7 +22,7 @@
             </ul>
             <ul class="o-list c-main-nav__list">
                 <li class="c-main-nav__item" data-page-type="settings">
-                    <a class="c-main-nav__link" href="#/settings">
+                    <a class="c-main-nav__link" href="/#/settings">
                         <svg class="c-main-nav__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <rect width="24" height="24" fill="none"/>
                                 <path d="M12,15.516A3.515,3.515,0,1,0,8.485,12,3.52,3.52,0,0,0,12,15.516Zm7.453-2.532,2.109,1.641q.328.234.094.656L19.64,18.75a.457.457,0,0,1-.609.188l-2.484-.984a8.451,8.451,0,0,1-1.688.984l-.375,2.625a.458.458,0,0,1-.469.422H9.984a.458.458,0,0,1-.469-.422L9.14,18.938a7.681,7.681,0,0,1-1.688-.984l-2.484.984a.455.455,0,0,1-.609-.188L2.343,15.281q-.234-.422.094-.656l2.109-1.641A7.549,7.549,0,0,1,4.5,12a7.549,7.549,0,0,1,.047-.984L2.437,9.375q-.328-.234-.094-.656L4.359,5.25a.457.457,0,0,1,.609-.188l2.484.984A8.451,8.451,0,0,1,9.14,5.062l.375-2.625a.458.458,0,0,1,.469-.422h4.031a.458.458,0,0,1,.469.422l.375,2.625a7.681,7.681,0,0,1,1.688.984l2.484-.984a.455.455,0,0,1,.609.188l2.016,3.469q.234.422-.094.656l-2.109,1.641A7.549,7.549,0,0,1,19.5,12a7.549,7.549,0,0,1-.047.984Z" transform="translate(-0.246 -0.015)"/>
@@ -43,68 +43,6 @@
         </nav>
     </div>
     <div class="c-app__main">
-        <div class="c-app__main-section c-app__main-section--overview js-container-main">
-            <h2 class="c-title ">Locations</h2>
-            <div class="c-app__section-content u-overflow-auto js-location">
-                <div class="c-card u-max-width--md">
-                    <p class="c-card__title ">Location name</p>
-                    <ul class="c-card__content ">
-                        <li class="c-floor has-alert ">
-                            <button class="c-floor__btn o-button-reset js-btn-floor" data-floor="Floor 0" data-location="Location"><p class="c-floor__btn-text ">Floor 0</p>
-                                <svg class="c-floor__icon " id="arrow_rounded " data-name="arrow rounded " xmlns="http://www.w3.org/2000/svg " width="6.585 " height="11.175 " viewBox="0 0 6.585 11.175 ">
-                                    <path class="c-floor__icon-symbol " id="keyboard_arrow_right-24px " d="M9.29,15.88,13.17,12,9.29,8.12A1,1,0,0,1,10.7,6.71l4.59,4.59a1,1,0,0,1,0,1.41L10.7,17.3a1,1,0,0,1-1.41,0,1.017,1.017,0,0,1,0-1.42Z
-    " transform="translate(-8.997 -6.418) "/>
-                                </svg>
-                            </button>
-                        </li>
-                        <li class="c-floor ">
-                            <button class="c-floor__btn o-button-reset js-btn-floor" data-floor="FLoor 1" data-location="Location"><p class="c-floor__btn-text ">Floor 1</p>
-                                <svg class="c-floor__icon " id="arrow_rounded " data-name="arrow rounded " xmlns="http://www.w3.org/2000/svg " width="6.585 " height="11.175 " viewBox="0 0 6.585 11.175 ">
-                                    <path class="c-floor__icon-symbol " id="keyboard_arrow_right-24px " d="M9.29,15.88,13.17,12,9.29,8.12A1,1,0,0,1,10.7,6.71l4.59,4.59a1,1,0,0,1,0,1.41L10.7,17.3a1,1,0,0,1-1.41,0,1.017,1.017,0,0,1,0-1.42Z
-    " transform="translate(-8.997 -6.418) "/>
-                                </svg>
-                            </button>
-                        </li>
-                        <li class="c-floor has-alert ">
-                            <button class="c-floor__btn o-button-reset js-btn-floor"><p class="c-floor__btn-text ">Floor 2</p>
-                                <svg class="c-floor__icon " id="arrow_rounded " data-name="arrow rounded " xmlns="http://www.w3.org/2000/svg " width="6.585 " height="11.175 " viewBox="0 0 6.585 11.175 ">
-                                    <path class="c-floor__icon-symbol " id="keyboard_arrow_right-24px " d="M9.29,15.88,13.17,12,9.29,8.12A1,1,0,0,1,10.7,6.71l4.59,4.59a1,1,0,0,1,0,1.41L10.7,17.3a1,1,0,0,1-1.41,0,1.017,1.017,0,0,1,0-1.42Z
-    " transform="translate(-8.997 -6.418) "/>
-                                </svg>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="c-app__main-section c-app__main-section--alerts js-container-side">
-            <div class="c-app__section ">
-                <h2 class="c-title ">Alerts</h2>
-                <div class="u-overflow-auto c-app__section-content js-alerts ">
-                    <div class="c-card c-card--room u-max-width--lg js-room room-has-alert" data-room="BCE.A.0.001 ">
-                        <p class="c-card__title c-card__title--alert">Room</p>
-                        <ul class="c-card__content c-measurements ">
-                            <li class="c-measurements__item ">
-                                <p>Humidity</p>
-                                <p>90.921%</p>
-                            </li>
-                            <li class="c-measurements__item ">
-                                <p>Temperature</p>
-                                <p>26.59 C</p>
-                            </li>
-                            <li class="c-measurements__item ">
-                                <p>CO2</p>
-                                <p>446 ppm</p>
-                            </li>
-                            <li class="c-measurements__item ">
-                                <p>TVOC</p>
-                                <p>7 ppb</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </section>

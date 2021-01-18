@@ -1,0 +1,99 @@
+<div class="c-app__main c-app__main--settings">
+    <div class="c-app__main-section c-app__main-section--settings">
+        <h2 class="c-title">User settings</h2>
+        <form class="c-form c-form--settings u-max-width--lg">
+            <h2 class="c-title c-title--sub">Alerts</h2>
+            <ul class="o-list c-toggle-list c-form-section">
+                <li class="c-form-field c-form-field--option c-toggle-list__item">
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="toggle-email">
+                    <label class="c-label c-label--option c-custom-toggle c-custom-toggle--inverted" for="toggle-email">
+                            <span class="c-custom-toggle__fake-input">
+                            </span>Email notifications
+                        </label>
+                </li>
+                <li class="c-form-field c-form-field--option c-toggle-list__item">
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="toggle-sms">
+                    <label class="c-label c-label--option c-custom-toggle c-custom-toggle--inverted" for="toggle-sms">
+                            <span class="c-custom-toggle__fake-input">
+                            </span>SMS notifications
+                        </label>
+                </li>
+                <li class="c-form-field c-form-field--option c-toggle-list__item">
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="toggle-browser-alerts">
+                    <label class="c-label c-label--option c-custom-toggle c-custom-toggle--inverted" for="toggle-browser-alerts">
+                            <span class="c-custom-toggle__fake-input">
+                            </span>In-browser alerts
+                        </label>
+                </li>
+            </ul>
+            <h2 class="c-title c-title--sub">Info</h2>
+            <div class="c-form-section">
+                <div class="c-input">
+                    <label for="email">Email</label>
+                    <input class="c-input__field" type="email" id="email" name="email">
+                </div>
+
+                <div class="c-input">
+                    <label for="phone">Phone</label>
+                    <input class="c-input__field" type="tel" id="phone" name="phone">
+                </div>
+            </div>
+            <h2 class="c-title c-title--sub">Password</h2>
+            <div class="c-form-section">
+                <div class="c-input">
+                    <label for="old-pass">Old password</label>
+                    <input class="c-input__field" type="password" id="old-pass" name="old-pass">
+                </div>
+
+                <div class="c-input">
+                    <label for="new-pass">New password</label>
+                    <input class="c-input__field" type="password" id="new-pass" name="new-pass">
+                </div>
+
+                <div class="c-input">
+                    <label for="confirm-pass">Confirm password</label>
+                    <input class="c-input__field" type="password" id="confirm-pass" name="confirm-pass">
+                </div>
+            </div>
+            <button class="o-button-reset c-button u-max-width--md c-button--apply" type="submit">Save</button>
+        </form>
+    </div>
+
+    <div class="c-app__main-section c-app__main-section--settings js-settings-admin" hidden>
+        <h2 class="c-title">Admin settings</h2>
+        <form class="c-form c-form--settings u-max-width--lg">
+            <h2 class="c-title c-title--sub">Login</h2>
+            <ul class="o-list c-toggle-list c-form-section">
+                <li class="c-form-field c-form-field--option c-toggle-list__item">
+                    <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="toggle-ms-login">
+                    <label class="c-label c-label--option c-custom-toggle c-custom-toggle--inverted" for="toggle-ms-login">
+                            <span class="c-custom-toggle__fake-input">
+                            </span>Non-microsoft login
+                        </label>
+                </li>
+
+            </ul>
+            <h2 class="c-title c-title--sub">CO<sub>2</sub> tresholds</h2>
+            <div class="c-form-section">
+                <div class="c-input">
+                    <label for="co2-yellow">code yellow</label>
+                    <input class="c-input__field" type="number" id="co2-yellow" name="co2-yellow">
+                </div>
+
+                <div class="c-input">
+                    <label for="co2-red">code red</label>
+                    <input class="c-input__field" type="number" id="co2-red" name="co2-red">
+                </div>
+            </div>
+            <button class="o-button-reset c-button u-max-width--md c-button--apply" type="submit">Save</button>
+
+        </form>
+        <div class="c-form c-form--settings">
+            <h2 class="c-title c-title--sub">Other</h2>
+            <div class="c-form-section">
+                <button class="o-button-reset c-button c-button--apply" type="submit">configure users</button>
+                <button class="o-button-reset c-button c-button--apply" type="submit">configure locations</button>
+            </div>
+        </div>
+    </div>
+</div>

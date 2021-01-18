@@ -3,6 +3,7 @@ import { get } from './util/Data.js'
 export default class Router {
     _cache = new Map();
     _handlers = new Map();
+    _innerHandlers = new Map();
 
     constructor(app) {
         this.app = app;
@@ -10,6 +11,10 @@ export default class Router {
 
     get active() {
         return this._active;
+    }
+
+    get activeInner() {
+        return this._innerActive;
     }
 
     get search() {
@@ -51,8 +56,34 @@ export default class Router {
         this.app.body.innerHTML = contents;
 
         const instance = this._handlers.get(path);
+        this._innerActive = undefined;
         if (instance) instance.run();
         this._active = instance;
+    }
+
+    async navigateInner(path) {
+        document.title = 'AirMonitor | ' + path;
+
+        const contents = await this.prepare('inner/' + path);
+
+        const inner = document.querySelector('.c-app__main');
+        if (!inner) {
+            window.location = '/#/' + path;
+            location.reload();
+
+            console.log('Unable to navigate inner, is the home content loaded?');
+
+            return;
+        }
+        inner.outerHTML = contents;
+
+        if (this._el) this._el.classList.remove('c-main-nav__item--current');
+        this._el = document.querySelector(`[href="/#/${path}"]`)?.parentElement;
+        if (this._el) this._el.classList.add('c-main-nav__item--current');
+
+        const instance = this._innerHandlers.get(path);
+        if (instance) instance.run();
+        this._innerActive = instance;
     }
 
     /**
@@ -62,5 +93,14 @@ export default class Router {
      */
     register(path, instance) {
         this._handlers.set(path, instance);
+    }
+
+    /**
+     * Register an inner path handler
+     * @param {string} path 
+     * @param {Object} instance 
+     */
+    registerInner(path, instance) {
+        this._innerHandlers.set(path, instance);
     }
 }
