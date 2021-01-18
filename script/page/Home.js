@@ -1,3 +1,4 @@
+import InnerFloor from './InnerFloor.js';
 import InnerHome from './InnerHome.js'
 
 export default class Home {
@@ -6,6 +7,7 @@ export default class Home {
     constructor(app) {
         this.app = app;
 
+        this.app.router.registerInner('floor', new InnerFloor(app));
         this.app.router.registerInner('home', new InnerHome(app));
         //this.app.router.registerInner('settings', new InnerSettings(app));
     }
