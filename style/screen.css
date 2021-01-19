@@ -382,7 +382,7 @@ body {
 .c-input {
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
+    row-gap: 4px;
 }
 
 .c-input+.c-input {
@@ -395,12 +395,50 @@ body {
     row-gap: 0;
     align-items: center;
     margin-bottom: 1rem;
-    margin-left: 0.5rem;
+    /* margin-left: 0.5rem; */
 }
 
 .c-input--toggle {
     display: flex;
     flex-wrap: nowrap;
+}
+
+.c-input--date input {
+    width: 100%;
+}
+
+
+/* .c-input--date input::-webkit-inner-spin-button,
+.c-input--date input::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+} */
+
+.c-input--select select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.c-input .c-custom-select {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+}
+
+.c-custom-select__symbol {
+    fill: var(--global-color-accent);
+    margin-left: -1.75rem;
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+}
+
+.c-custom-select select {
+    background-color: var(--global-color-background);
+    color: var(--global-color-accent);
 }
 
 .c-input>label {
@@ -585,6 +623,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     padding-right: 2rem;
+    gap: 1rem;
 }
 
 
@@ -713,8 +752,8 @@ Main navigation component
     color: var(--local-color-text);
     border-radius: var(--local-border-radius);
     box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.1);
-    min-width: min-content;
-    margin: 1rem 0.5rem;
+    /* min-width: min-content; */
+    margin: 1rem 0;
 }
 
 .c-card__title {
@@ -724,6 +763,7 @@ Main navigation component
     border-radius: var(--local-border-radius) var(--local-border-radius) 0 0;
     font-size: 1.5rem;
     font-weight: 500;
+    line-height: 2rem;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -806,7 +846,7 @@ Main navigation component
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    min-width: 20rem;
+    min-width: 18rem;
 }
 
 .c-measurements__item+.c-measurements__item {
@@ -900,13 +940,27 @@ Main navigation component
     .c-app__main {
         grid-template-rows: min-content 1fr;
         grid-template-columns: 100%;
+        overflow: auto;
     }
     .c-app__main--settings {
         grid-template-rows: 100%;
         grid-template-columns: repeat(2, max-content);
     }
+    .c-app__section {
+        grid-template-columns: 100%;
+    }
+    .c-app__section--stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 3rem 1fr;
+        grid-area: 'title title filter1 filter2';
+        width: 100%;
+    }
     .c-app__section-content {
         width: 100%;
+    }
+    .c-app__section-content--stats {
+        width: min-content;
     }
     .c-app__main-section--overview {
         grid-row: 2;
@@ -923,6 +977,12 @@ Main navigation component
         flex-wrap: nowrap;
         overflow-x: auto;
         padding-left: 0;
+    }
+    .c-app__main-section--filter-data .c-app__section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 3rem 1fr;
+        grid-area: 'title title section1 section2';
     }
 }
 
@@ -942,15 +1002,23 @@ Main navigation component
     .c-art {
         grid-row: 1;
     }
-    .c-app__main--settings {
+    .c-app__section--stats {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: max-content max-content;
+    }
+    .c-app__main {
         grid-template-columns: 100%;
         justify-items: center;
         grid-template-rows: repeat(2, max-content);
         overflow: auto;
     }
-    .c-app__main-section--settings {
-        width: min-content;
-        padding: 2rem 0;
+    .c-app__main-section {
+        width: max-content;
+    }
+    .c-app__main-section--filter-data .c-app__section {
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
     }
 }
 
@@ -996,20 +1064,18 @@ Main navigation component
     .c-main-nav__item+.c-main-nav__item {
         margin: 0;
     }
-    .c-app__main {
-        margin-left: 0;
-    }
     .c-measurements__item {
         min-width: 12rem;
     }
-    .c-app__main--settings {
+    .c-app__main {
+        margin-left: 0;
         display: block;
         position: absolute;
         padding-top: 0;
         width: 100%;
         min-height: max-content;
     }
-    .c-app__main-section--settings {
+    .c-app__main-section {
         overflow: hidden;
         width: 100%;
         min-width: 0;
@@ -1018,14 +1084,21 @@ Main navigation component
         padding-right: 1rem;
         margin: 2rem 0;
     }
-    .c-app__main-section--settings+.c-app__main-section--settings {
+    .c-app__main-section+.c-app__main-section {
         margin-top: 2rem;
+    }
+    .c-app__section-content--stats {
+        width: 100%;
+        padding: 0;
     }
 }
 
 @media(max-width: 375px) {
     .c-app__main--settings {
         padding-bottom: 1rem;
+    }
+    .c-app__main {
+        padding-bottom: 3rem;
     }
 }
 
@@ -1086,4 +1159,14 @@ Main navigation component
 .u-overflow-auto {
     overflow: auto;
     overflow-x: hidden;
+}
+
+.u-margin-extra {
+    margin: 1rem 0.5rem;
+}
+
+@media(max-width: 425px) {
+    .u-max-width--lg {
+        max-width: 100%;
+    }
 }
