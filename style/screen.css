@@ -948,6 +948,7 @@ Main navigation component
     }
     .c-app__section {
         grid-template-columns: 100%;
+        column-gap: 1rem;
     }
     .c-app__section--stats {
         display: grid;
@@ -1002,7 +1003,7 @@ Main navigation component
     .c-art {
         grid-row: 1;
     }
-    .c-app__section--stats {
+    .c-app__section {
         display: grid;
         grid-template-columns: 100%;
         grid-template-rows: max-content max-content;
@@ -1072,7 +1073,6 @@ Main navigation component
         display: block;
         position: absolute;
         padding-top: 0;
-        padding-bottom: 5rem;
         width: 100%;
         min-height: max-content;
     }
@@ -1085,13 +1085,8 @@ Main navigation component
         padding-right: 1rem;
         margin: 2rem 0;
     }
-<<<<<<< HEAD
-    .c-app__main-section--settings+.c-app__main-section--settings {
-        margin-top: 1rem;
-=======
     .c-app__main-section+.c-app__main-section {
         margin-top: 2rem;
->>>>>>> develop
     }
     .c-app__section-content--stats {
         width: 100%;
@@ -1101,7 +1096,7 @@ Main navigation component
 
 @media(max-width: 375px) {
     .c-app__main--settings {
-        padding-bottom: 6rem;
+        padding-bottom: 1rem;
     }
     .c-app__main {
         padding-bottom: 3rem;
