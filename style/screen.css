@@ -1006,6 +1006,7 @@ Main navigation component
         display: block;
         position: absolute;
         padding-top: 0;
+        padding-bottom: 5rem;
         width: 100%;
         min-height: max-content;
     }
@@ -1019,13 +1020,13 @@ Main navigation component
         margin: 2rem 0;
     }
     .c-app__main-section--settings+.c-app__main-section--settings {
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
 }
 
 @media(max-width: 375px) {
     .c-app__main--settings {
-        padding-bottom: 1rem;
+        padding-bottom: 6rem;
     }
 }
 
