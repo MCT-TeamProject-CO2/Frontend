@@ -1,25 +1,42 @@
-<section class="c-grid--login">
-    <div class="c-login">
-        <p class="c-title">
-            Log in.
-        </p>
-        <form action="#" method="POST" class="c-form">
-            <div class="c-input">
-                <label for="username-email">Username/Email</label>
-                <input class="c-input__field" type="text" id="username-email" name="username-email" required>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
 
-            <div class="c-input">
-                <label for="password">Password</label>
-                <input class="c-input__field" type="password" id="password" name="password" required>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/screen2.css">
+    <title>Document</title>
+</head>
 
-            <button class="o-button-reset c-button c-button--login" type="submit">Sign in</button>
-        </form>
-        <button class="o-button-reset c-button--microsoft">Sign in with microsoft</button>
-    </div>
-    <div class="c-art" />
-</section>
-<section class="c-logo">
-    <img class="c-logo__image" src="./img/png/Opleidingslogo_Howest_Multimedia_en_Communicatietechnologie_liggend_BLAUW_RGB.png" alt="logo mct">
-</section>
+<body>
+    <section class="c-app">
+        <div class="c-app__main c-app__main--no-bar">
+            <div class="c-art u-y-span-2 u-x-span-6 u-y-1-span-8-bp2 u-x-4-span-3-bp2"></div>
+            <div class="c-login u-y-span-7 u-x-span-6 u-y-1-span-8-bp2 u-x-span-3-bp2">
+                <form action="#" method="POST" class="c-login__form">
+                    <p class="c-login__title">
+                        Log in.
+                    </p>
+                    <div class="c-input">
+                        <label for="username-email">Username/Email</label>
+                        <input class="c-input__field" type="text" id="username-email" name="username-email" required>
+                    </div>
+
+                    <div class="c-input">
+                        <label for="password">Password</label>
+                        <input class="c-input__field" type="password" id="password" name="password" required>
+                    </div>
+
+                    <button class="o-button-reset c-button" type="submit">Sign in</button>
+                </form>
+                <button class="o-button-reset c-button--microsoft">Sign in with microsoft</button>
+            </div>
+        </div>
+    </section>
+    <section class="c-logo">
+        <img class="c-logo__image" src="../img/png/Opleidingslogo_Howest_Multimedia_en_Communicatietechnologie_liggend_BLAUW_RGB.png" alt="logo mct">
+    </section>
+
+</body>
+
+</html>
