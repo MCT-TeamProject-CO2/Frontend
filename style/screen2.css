@@ -24,6 +24,7 @@
     --global-whitespace-md: calc(var(--global-baseline)*4);
     --global-whitespace-lg: calc(var(--global-baseline)*5);
     --global-whitespace-xl: calc(var(--global-baseline)*6);
+    --global-whitespace-xxl: calc(var(--global-baseline)*7);
     /*textsize*/
     --global-textsize-sm: 1rem;
     --global-textsize-md: 1.25rem;
@@ -390,12 +391,17 @@ body {
     padding: var(--global-whitespace-md);
 }
 
+.c-main-section+.c-main-section {
+    margin-top: var(--global-whitespace-xxl);
+}
+
 .c-main-section__title {
     font-size: var(--global-textsize-xl);
     color: var(--global-color-accent);
 }
 
 .c-main-section__content {
+    height: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -406,6 +412,9 @@ body {
 }
 
 @media(min-width: 1024px) {
+    .c-main-section+.c-main-section {
+        margin-top: 0;
+    }
     .c-main-section__content {
         flex-wrap: wrap;
         align-items: flex-start;
@@ -417,6 +426,10 @@ body {
 
 
 /*Component: card*/
+
+.c-cards {
+    width: 100%;
+}
 
 .c-card {
     background-color: var(--global-color-background);
@@ -432,7 +445,7 @@ body {
     border-radius: 10px 10px 0 0;
     padding: var(--global-whitespace-xs) var(--global-whitespace-sm);
     width: 100%;
-    height: 100%;
+    height: min-content;
     background: var(--global-color-dark-blue);
     margin: 0;
     font-size: var(--global-textsize-md);
@@ -520,6 +533,23 @@ body {
 
 .c-floor__btn:hover .c-floor__icon {
     fill: var(--global-color-light);
+}
+
+.c-floor-map {
+    width: 100%;
+    height: 10rem;
+}
+
+@media (min-width: 768px) {
+    .c-floor-map {
+        height: 16rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .c-floor-map {
+        min-height: 100%;
+    }
 }
 
 
@@ -769,6 +799,28 @@ body {
     border-color: var(--global-color-blue-howest);
     box-shadow: 0 0 0 2px var(--global-color-blue-howest);
     outline: none;
+}
+
+.c-search {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.c-search .c-input__field {
+    border-radius: 10px 0 0 10px;
+}
+
+.c-search .c-button {
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0 10px 10px 0;
+}
+
+.c-search__icon {
+    fill: var(--global-color-x-light);
 }
 
 
