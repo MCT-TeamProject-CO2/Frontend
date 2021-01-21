@@ -24,6 +24,7 @@
     --global-whitespace-md: calc(var(--global-baseline)*4);
     --global-whitespace-lg: calc(var(--global-baseline)*5);
     --global-whitespace-xl: calc(var(--global-baseline)*6);
+    --global-whitespace-xxl: calc(var(--global-baseline)*7);
     /*textsize*/
     --global-textsize-sm: 1rem;
     --global-textsize-md: 1.25rem;
@@ -33,6 +34,8 @@
     /*elements sizes*/
     --global-height-nav: 4rem;
     --global-width-nav: 100%;
+    /*transitions*/
+    --global-transitionTiming-alpha: .3s ease-out;
 }
 
 
@@ -388,12 +391,17 @@ body {
     padding: var(--global-whitespace-md);
 }
 
+.c-main-section+.c-main-section {
+    margin-top: var(--global-whitespace-xxl);
+}
+
 .c-main-section__title {
     font-size: var(--global-textsize-xl);
     color: var(--global-color-accent);
 }
 
 .c-main-section__content {
+    height: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -404,6 +412,9 @@ body {
 }
 
 @media(min-width: 1024px) {
+    .c-main-section+.c-main-section {
+        margin-top: 0;
+    }
     .c-main-section__content {
         flex-wrap: wrap;
         align-items: flex-start;
@@ -415,6 +426,10 @@ body {
 
 
 /*Component: card*/
+
+.c-cards {
+    width: 100%;
+}
 
 .c-card {
     background-color: var(--global-color-background);
@@ -430,7 +445,7 @@ body {
     border-radius: 10px 10px 0 0;
     padding: var(--global-whitespace-xs) var(--global-whitespace-sm);
     width: 100%;
-    height: 100%;
+    height: min-content;
     background: var(--global-color-dark-blue);
     margin: 0;
     font-size: var(--global-textsize-md);
@@ -518,6 +533,23 @@ body {
 
 .c-floor__btn:hover .c-floor__icon {
     fill: var(--global-color-light);
+}
+
+.c-floor-map {
+    width: 100%;
+    height: 10rem;
+}
+
+@media (min-width: 768px) {
+    .c-floor-map {
+        height: 16rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .c-floor-map {
+        min-height: 100%;
+    }
 }
 
 
@@ -767,6 +799,108 @@ body {
     border-color: var(--global-color-blue-howest);
     box-shadow: 0 0 0 2px var(--global-color-blue-howest);
     outline: none;
+}
+
+.c-search {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.c-search .c-input__field {
+    border-radius: 10px 0 0 10px;
+}
+
+.c-search .c-button {
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0 10px 10px 0;
+}
+
+.c-search__icon {
+    fill: var(--global-color-x-light);
+}
+
+
+/*Component: form*/
+
+.c-form {
+    width: 100%;
+}
+
+.c-form__title {
+    font-size: var(--global-textsize-md);
+}
+
+.c-form__section {
+    margin: 0 var(--global-whitespace-sm);
+}
+
+.c-form__section+.c-form__title {
+    margin-top: var(--global-whitespace-xl);
+}
+
+
+/*Component: toggle*/
+
+.c-toggle-list__item+.c-toggle-list__item {
+    margin: var(--global-whitespace-xs) 0;
+}
+
+.c-custom-toggle {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.c-custom-toggle__fake-input {
+    --local-toggle-background: var(--global-color-x-light);
+    --local-toggle-background-checked: var(--global-color-dark-blue);
+    --local-toggle-btn-background: var(--global-color-background);
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 45px;
+    background-color: var(--local-toggle-background);
+    transition: all var(--global-transitionTiming-alpha);
+    display: flex;
+    align-items: center;
+}
+
+.c-custom-toggle__fake-input::after {
+    content: "";
+    background-color: var(--local-toggle-btn-background);
+    border-radius: 45px;
+    width: 1rem;
+    height: 1rem;
+    margin: var(--global-whitespace-xxs);
+    box-shadow: 0 1px 3px 2px #00000016;
+    display: block;
+    transition: all .1s ease-out;
+}
+
+
+/*Component: option*/
+
+.c-option--hidden:checked+.c-custom-toggle .c-custom-toggle__fake-input {
+    --local-toggle-background: var(--global-color-blue-howest);
+}
+
+.c-option--hidden:checked+.c-custom-toggle .c-custom-toggle__fake-input::after {
+    transform: translateX(1.5rem);
+}
+
+.c-option--hidden:checked:focus+.c-custom-toggle .c-custom-toggle__fake-input,
+.c-option--hidden:checked:active+.c-custom-toggle .c-custom-toggle__fake-input {
+    box-shadow: 0 0 0 2px var(--global-color-accent);
+}
+
+.c-option--hidden:focus+.c-custom-toggle .c-custom-toggle__fake-input,
+.c-option--hidden:active+.c-custom-toggle .c-custom-toggle__fake-input {
+    box-shadow: 0 0 0 2px var(--global-color-blue-howest);
 }
 
 
