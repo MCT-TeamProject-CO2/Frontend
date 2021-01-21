@@ -473,16 +473,18 @@ body {
     margin: 0;
 }
 
+.c-card__footer {
+    border-top: 1px solid var(--global-color-x-light);
+    padding: var(--global-whitespace-sm) 0 0 1rem;
+}
+
 .c-card--clickable {
+    --local-color-hover: var(--global-color-x-light);
     cursor: pointer;
 }
 
 .c-card--clickable:hover {
-    background-color: var(--global-color-x-light);
-}
-
-.c-card--clickable:hover .c-card__text {
-    color: var(--global-color-x-light);
+    background-color: var(--local-color-hover);
 }
 
 
