@@ -774,8 +774,20 @@ body {
     color: white;
 }
 
+.c-button:focus,
+.c-button:active {
+    border-color: var(--global-color-blue-howest);
+    box-shadow: 0 0 0 3px var(--global-color-blue-howest);
+    outline: none;
+}
+
 
 /*Component: input*/
+
+.c-input {
+    --local-color-background: var(--global-color-background);
+    --local-color-accent: var(--global-color-accent);
+}
 
 .c-input+.c-input {
     margin-top: var(--global-whitespace-lg);
@@ -801,6 +813,36 @@ body {
     outline: none;
 }
 
+
+/*custom input*/
+
+.c-input__custom select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--local-color-background);
+    color: var(--local-color-accent);
+}
+
+.c-input__custom {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+}
+
+.c-input__symbol {
+    fill: var(--global-color-accent);
+    margin-left: -1.25rem;
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+}
+
+
+/*search input*/
+
 .c-search {
     width: 100%;
     display: flex;
@@ -821,6 +863,11 @@ body {
 
 .c-search__icon {
     fill: var(--global-color-x-light);
+}
+
+.c-search .c-input__field:focus+.c-button,
+.c-search .c-input__field:active+.c-button {
+    box-shadow: 0 0 0 2px var(--global-color-blue-howest);
 }
 
 
@@ -1017,13 +1064,19 @@ body {
     .u-x-1-span-4-bp3 {
         grid-column: 1 / span 4;
     }
+    .u-x-1-span-3-bp3 {
+        grid-column: 1 / span 3;
+    }
+    .u-x-4-span-3-bp3 {
+        grid-column: 4 / span 3;
+    }
     .u-x-5-span-2-bp3 {
         grid-column: 5 / span 2;
     }
 }
 
 
-/*Utilities: width*/
+/*Utilities: size*/
 
 .u-width-fit-content {
     width: fit-content;
@@ -1039,6 +1092,10 @@ body {
     .u-width-max-bp3 {
         width: 100%;
     }
+}
+
+.u-height-fit-content {
+    height: fit-content;
 }
 
 
@@ -1062,3 +1119,27 @@ body {
         flex-wrap: wrap;
     }
 }
+
+
+/*Utilities: display*/
+
+.u-display-none {
+    display: none;
+}
+
+@media(min-width: 768px) {
+    .u-display-block-bp2 {
+        display: block;
+    }
+}
+
+
+/*color theme*/
+
+
+/* @media(prefers-color-scheme: dark) {
+     :root {
+        --global-color-background: var(--global-color-x-dark);
+        --global-color-accent: var(--global-color-light);
+    }
+} */
