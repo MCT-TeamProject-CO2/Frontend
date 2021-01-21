@@ -12,6 +12,7 @@
     --global-color-dark-blue: #124257;
     --global-color-alert: #ee4949;
     --global-color-gradient: linear-gradient(to bottom left, #18b6e6, #269acb);
+    --global-color-gradient-red: linear-gradient(to bottom left, #ee4949, #a52525);
     --global-color-background: var(--global-color-light);
     --global-color-accent: var(--global-color-x-dark);
     --global-color-scroll: var(--global-color-x-light);
@@ -438,6 +439,27 @@ body {
     padding: 0 var(--global-whitespace-lg);
 }
 
+.c-popup-close {
+    --local-color-bg: var(--global-color-light);
+    --local-color-fill: var(--global-color-dark-blue);
+    margin-left: auto;
+    margin-right: 0;
+    background-color: var(--local-color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 45px;
+}
+
+.c-popup-close__icon {
+    fill: var(--local-color-fill);
+}
+
+.c-popup-close:hover {
+    --local-color-bg: var(--global-color-blue-howest);
+    --local-color-fill: var(--global-color-light);
+}
+
 
 /*Component: card*/
 
@@ -463,6 +485,8 @@ body {
     background: var(--global-color-dark-blue);
     margin: 0;
     font-size: var(--global-textsize-md);
+    display: flex;
+    align-items: center;
 }
 
 .c-card__content {
@@ -485,6 +509,17 @@ body {
 
 .c-card--clickable:hover {
     background-color: var(--local-color-hover);
+}
+
+.c-card+.c-card {
+    margin-top: var(--global-whitespace-sm);
+}
+
+@media(min-width: 768px) {
+    .c-card+.c-card {
+        margin-left: var(--global-whitespace-sm);
+        margin-top: 0;
+    }
 }
 
 
@@ -750,13 +785,18 @@ body {
 /*Component: Button*/
 
 .c-button {
-    background: var(--global-color-gradient);
+    --local-color-background: var(--global-color-gradient);
+    background: var(--local-color-background);
     width: 100%;
     height: 3rem;
     color: var(--global-color-light);
     font-weight: 600;
     border-radius: 5px;
     margin-top: var(--global-whitespace-xl);
+}
+
+.c-button--red {
+    --local-color-background: var(--global-color-gradient-red);
 }
 
 .c-button--microsoft {
@@ -778,7 +818,7 @@ body {
 }
 
 .c-button:hover {
-    background: var(--global-color-blue-howest);
+    --local-color-background: var(--global-color-blue-howest);
 }
 
 .c-button--microsoft::before {
@@ -795,6 +835,32 @@ body {
     border-color: var(--global-color-blue-howest);
     box-shadow: 0 0 0 3px var(--global-color-blue-howest);
     outline: none;
+}
+
+.c-button--red:hover {
+    --local-color-background: var(--global-color-alert);
+}
+
+
+/*Component: add*/
+
+.c-add {
+    position: relative;
+    margin: var(--global-whitespace-lg) var(--global-whitespace-sm) var(--global-whitespace-sm) auto;
+    padding: var(--global-whitespace-sm);
+    background: var(--global-color-blue-howest);
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-add__icon {
+    fill: var(--global-color-light);
+}
+
+.c-add:hover {
+    background-color: var(--global-color-dark-blue);
 }
 
 
@@ -1113,6 +1179,9 @@ body {
 }
 
 @media (min-width: 768px) {
+    .u-width-fit-content-bp2 {
+        width: fit-content;
+    }
     .u-width-half-bp2 {
         width: 50%;
     }
