@@ -14,6 +14,7 @@
     --global-color-alert-orange: #ee9049;
     --global-color-gradient: linear-gradient(to bottom left, #18b6e6, #269acb);
     --global-color-gradient-red: linear-gradient(to bottom left, #ee4949, #a52525);
+    --global-color-gradient-grey: linear-gradient(to bottom left, #707070, #5c5b5b);
     --global-color-background: var(--global-color-light);
     --global-color-accent: var(--global-color-x-dark);
     --global-color-scroll: var(--global-color-x-light);
@@ -801,6 +802,12 @@ body {
 
 /*Component: Button*/
 
+.c-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: var(--global-whitespace-md);
+}
+
 .c-button {
     --local-color-background: var(--global-color-gradient);
     background: var(--local-color-background);
@@ -814,6 +821,10 @@ body {
 
 .c-button--red {
     --local-color-background: var(--global-color-gradient-red);
+}
+
+.c-button--grey {
+    --local-color-background: var(--global-color-gradient-grey);
 }
 
 .c-button--microsoft {
@@ -856,6 +867,10 @@ body {
 
 .c-button--red:hover {
     --local-color-background: var(--global-color-alert-red);
+}
+
+.c-button--grey:hover {
+    --local-color-background: var(--global-color-xx-light);
 }
 
 
@@ -1202,6 +1217,9 @@ body {
     .u-width-half-bp2 {
         width: 50%;
     }
+    .u-width-3-4-bp2 {
+        width: 75%;
+    }
 }
 
 @media(min-width: 1024px) {
@@ -1210,6 +1228,9 @@ body {
     }
     .u-width-3-4-bp3 {
         width: 75%;
+    }
+    .u-width-half-bp3 {
+        width: 50%;
     }
 }
 
@@ -1230,6 +1251,10 @@ body {
 
 .u-flex-direction-column {
     flex-direction: column;
+}
+
+.u-flex-align-center {
+    align-items: center;
 }
 
 @media(min-width: 425px) {
