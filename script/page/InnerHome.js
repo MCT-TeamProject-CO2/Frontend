@@ -36,6 +36,8 @@ export default class InnerHome {
             : '';
 
         alerts.forEach(alert => {
+            const date = new Date(alert.updatedAt);
+
             const html = `<div class="c-card c-card--clickable u-width-fit-content u-width-max-bp3 js-room room-has-alert" data-room="${alert.tagString}">
                 <p class="c-card__title">${alert.tagString}</p>
                 <ul class="o-list c-card__content c-measurements ">
@@ -56,6 +58,7 @@ export default class InnerHome {
                         <p>${Math.round(alert.tvoc * 1e4) / 1e4} ppb</p>
                     </li>
                 </ul>
+                <p class="c-card__footer">${date.toLocaleDateString()} - ${date.toLocaleTimeString()}</p>
             </div>`;
 
             this.alerts_wrapper.insertAdjacentHTML('beforeend', html);
