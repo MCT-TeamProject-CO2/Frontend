@@ -425,6 +425,20 @@ body {
 }
 
 
+/*Component: popup*/
+
+.c-popup {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--global-whitespace-lg);
+}
+
+
 /*Component: card*/
 
 .c-cards {
@@ -1080,6 +1094,10 @@ body {
 
 .u-width-fit-content {
     width: fit-content;
+}
+
+.u-width-max {
+    width: 100%;
 }
 
 @media(min-width: 426px) {
