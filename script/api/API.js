@@ -1,5 +1,6 @@
 import { ApiHost } from '../util/Constants.js'
 import Data from '../util/Data.js'
+import Alerts from './Alerts.js'
 import Auth from './Auth.js'
 import Locations from './Locations.js'
 /*
@@ -9,6 +10,7 @@ import Users from './Users.js'
 */
 
 export default class API {
+    alerts = new Alerts(this);
     auth = new Auth(this);
     locations = new Locations(this);
     /*measurements = new Measurements(this);
