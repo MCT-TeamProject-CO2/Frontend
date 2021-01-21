@@ -40,14 +40,14 @@ export default class Popup extends BaseAlert {
     }
 
     push() {
-        document.body.insertAdjacentHTML('beforeend', `<div id="${this.id}" class="c-popup">
-            <div class="c-card c-card--alert u-max-width--lg" data-room="BCE.A.0.001">
+        document.body.insertAdjacentHTML('beforeend', `<section id="${this.id}" class="c-popup">
+            <div class="c-card u-width-max u-width-fit-content-bp1">
                 <p class="c-card__title">${this.title}</p>
-                <ul class="c-card__content c-measurements">
-                    ${this.body}
-                </ul>
+                <div class="c-card__content">
+                    <p>${this.body}</p>
+                </div>
             </div>
-        </div>`);
+        </section>`);
 
         this._e = document.getElementById(this.id);
 
