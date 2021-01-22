@@ -523,6 +523,21 @@ body {
     background-color: var(--local-color-hover);
 }
 
+.c-card__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    margin-left: var(--global-whitespace-lg);
+}
+
+.c-card__icon--edit {
+    fill: var(--global-color-light);
+}
+
+.c-card__icon--delete {
+    fill: var(--global-color-alert-red);
+}
+
 
 /*Component: measurements*/
 
@@ -542,7 +557,7 @@ body {
 /*Component: floor*/
 
 .c-floor {
-    margin: var(--global-whitespace-xs);
+    margin: 0;
 }
 
 .c-floor__btn {
@@ -553,6 +568,10 @@ body {
     border: 1px solid var(--global-color-dark-blue);
     padding: var(--global-whitespace-sm) var(--global-whitespace-md);
     border-radius: 45px;
+}
+
+.c-floor__btn--no-click {
+    cursor: auto;
 }
 
 .c-floor__text {
@@ -568,7 +587,12 @@ body {
     fill: var(--global-color-accent);
 }
 
-.c-floor__btn:hover {
+.c-floor__icon--delete {
+    fill: var(--global-color-alert-red);
+    cursor: pointer;
+}
+
+.c-floor__btn:hover:not(.c-floor__btn--no-click) {
     background-color: var(--global-color-dark-blue);
 }
 
@@ -579,11 +603,11 @@ body {
     outline: none;
 }
 
-.c-floor__btn:hover .c-floor__text {
+.c-floor__btn:hover:not(.c-floor__btn--no-click) .c-floor__text {
     color: var(--global-color-light);
 }
 
-.c-floor__btn:hover .c-floor__icon {
+.c-floor__btn:hover:not(.c-floor__btn--no-click) .c-floor__icon {
     fill: var(--global-color-light);
 }
 
