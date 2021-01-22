@@ -639,6 +639,55 @@ body {
 }
 
 
+/*Component: Dropzone*/
+
+.c-dropzone {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--global-whitespace-md);
+}
+
+.c-dropzone__section {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    column-gap: var(--global-whitespace-md);
+    row-gap: var(--global-whitespace-lg);
+}
+
+.c-dropzone__number {
+    width: 5rem;
+}
+
+.c-dropzone__number .c-input__field {
+    height: 2rem;
+}
+
+.c-dropzone__file {
+    margin-top: 0 !important;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.c-dropzone__add {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    column-gap: var(--global-whitespace-md);
+}
+
+.c-dropzone__text {
+    font-size: var(--global-textsize-md);
+    color: var(--global-color-accent);
+    margin: 0;
+}
+
+.c-dropzone__icon {
+    fill: var(--global-color-accent);
+}
+
+
 /*room has alert*/
 
 .room-has-alert .c-card__title::after {
