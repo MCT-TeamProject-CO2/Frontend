@@ -55,23 +55,23 @@
                         <label for="confirm-pass">Confirm password</label>
                         <input class="c-input__field" type="password" id="confirm-pass" name="confirm-pass">
                     </div>
-                    <button class="o-button-reset c-button" type="submit">Save</button>
+                    <button class="o-button-reset u-width-half c-button" type="submit">Save</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="c-main-section u-x-span-6 u-x-span-3-bp2 js-settings-admin">
+    <div class="c-main-section u-x-span-6 u-x-span-3-bp2 js-settings-admin" hidden>
         <h2 class="c-main-section__title">Admin settings</h2>
         <div class="c-main-section__content">
             <form class="c-form">
                 <h2 class="c-form__title">Login</h2>
                 <ul class="o-list c-form__section c-toggle-list">
                     <li class="c-toggle-list__item">
-                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="toggle-ms-login">
+                        <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="toggle-ms-login" name="toggle-ms-login">
                         <label class="c-custom-toggle" for="toggle-ms-login">
                             <span class="c-custom-toggle__fake-input">
-                            </span>Non-microsoft login
+                            </span>OAUTH2 only
                         </label>
                     </li>
 
@@ -79,22 +79,22 @@
                 <h2 class="c-form__title">CO<sub>2</sub> tresholds</h2>
                 <div class="c-form__section">
                     <div class="c-input">
-                        <label for="co2-yellow">code yellow</label>
+                        <label for="co2-yellow">Orange</label>
                         <input class="c-input__field" type="number" min="0" id="co2-yellow" name="co2-yellow">
                     </div>
 
                     <div class="c-input">
-                        <label for="co2-red">code red</label>
+                        <label for="co2-red">Red</label>
                         <input class="c-input__field" type="number" min="0" id="co2-red" name="co2-red">
                     </div>
-                    <button class="o-button-reset c-button" type="submit">Save</button>
+                    <button class="o-button-reset u-width-half c-button" type="submit">Save</button>
                 </div>
 
                 <h2 class="c-form__title">Other</h2>
                 <div class="c-form__section">
-                    <button class="o-button-reset c-button" type="button">configure users</button>
-                    <button class="o-button-reset c-button" type="button">configure locations</button>
-                    <button class="o-button-reset c-button" type="button">Refresh smartplugs</button>
+                    <button class="o-button-reset u-width-half-bp2 c-button" type="button">configure users</button>
+                    <button class="o-button-reset u-width-half-bp2 c-button" type="button">configure locations</button>
+                    <button class="o-button-reset u-width-half-bp2 c-button" type="button">Refresh smartplugs</button>
                 </div>
             </form>
         </div>
