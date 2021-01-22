@@ -904,7 +904,7 @@ body {
     position: relative;
     margin: var(--global-whitespace-lg) var(--global-whitespace-sm) var(--global-whitespace-sm) auto;
     padding: var(--global-whitespace-sm);
-    background: var(--global-color-blue-howest);
+    background: var(--global-color-dark-blue);
     border-radius: 45px;
     display: flex;
     align-items: center;
@@ -916,7 +916,7 @@ body {
 }
 
 .c-add:hover {
-    background-color: var(--global-color-dark-blue);
+    background-color: var(--global-color-blue-howest);
 }
 
 
