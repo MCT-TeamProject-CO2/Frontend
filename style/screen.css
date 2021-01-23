@@ -476,6 +476,9 @@ body {
 
 .c-cards {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--global-whitespace-md);
 }
 
 .c-card {
