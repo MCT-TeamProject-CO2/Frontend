@@ -11,6 +11,10 @@ document.addEventListener(
             // get all elements who have the room data attribute with the current value
             var room = target.dataset.room;
             var result = document.querySelectorAll(`[data-room = "${room}"]`);
+            target.style.cursor = "pointer";
+            resetHighlight();
+            target.classList.add("room-hover");
+            target.style.fillOpacity = 0.1;
 
             // add the css class to all elements
             var i;
@@ -50,6 +54,15 @@ document.addEventListener(
     },
     false
 );
+
+function resetHighlight() {
+    const floorplan = document.querySelector(".js-floorplan");
+    const room = floorplan.querySelector(".room-hover");
+    if (room) {
+        room.style.fillOpacity = 0;
+        room.classList.remove("room-hover");
+    }
+}
 
 // --------------- PAN + SCOLL ---------------------------
 document.addEventListener("DOMContentLoaded", function() {
@@ -170,7 +183,44 @@ document.addEventListener("DOMContentLoaded", function() {
         var moveGlobal = point.matrixTransform(svg.getScreenCTM().inverse());
 
         // move to current position
-        viewBox.x -= moveGlobal.x - startGlobal.x;
-        viewBox.y -= moveGlobal.y - startGlobal.y;
+
+        deltaX = moveGlobal.x - startGlobal.x;
+        deltaY = moveGlobal.y - startGlobal.y;
+
+        viewBox.x -= deltaX;
+        viewBox.y -= deltaY;
+    }
+
+    const rooms = document.querySelectorAll(".js-room");
+    const floorplan = document.querySelector(".js-floorplan");
+
+    for (let room of rooms) {
+        room.addEventListener("mouseover", () => {
+            resetHighlight();
+            showRoom(room.dataset.room);
+        });
+
+        room.addEventListener("click", () => { centerOnRoom(room.dataset.room); });
+    }
+
+    //move to room on click
+    function centerOnRoom(roomName) {
+        const room = floorplan.querySelector(`[data-room = "${roomName}"]`);
+
+        movX = room.x.baseVal.value - viewBox.width / 2 + room.width.baseVal.value / 2;
+        movY = room.y.baseVal.value - viewBox.height / 2 + room.height.baseVal.value / 2;
+
+        viewBox.x = movX;
+        viewBox.y = movY;
+
+        console.log(room);
+    }
+
+    // highlight room on map
+    function showRoom(roomName) {
+        resetHighlight();
+        const room = floorplan.querySelector(`[data-room = "${roomName}"]`);
+        room.classList.add("room-hover");
+        room.style.fillOpacity = 0.1;
     }
 });

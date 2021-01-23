@@ -1382,6 +1382,16 @@ body {
 } */
 
 
+/*needed in js*/
+
+.room-hover {
+    stroke: var(--global-color-blue-howest);
+    fill: var(--global-color-blue-howest);
+    stroke-linejoin: round;
+    stroke-width: 5;
+}
+
+
 /*Attributes*/
 
 [hidden] {
