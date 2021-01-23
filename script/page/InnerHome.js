@@ -14,6 +14,8 @@ export default class InnerHome {
         if (succes) {
             this.renderAlerts(data);
 
+            setTimeout(this.loadAlerts.bind(this), 12e4);
+
             return;
         }
         this.logout();
@@ -38,7 +40,7 @@ export default class InnerHome {
         alerts.forEach(alert => {
             const date = new Date(alert.updatedAt);
 
-            const html = `<div class="c-card c-card--clickable u-width-fit-content u-width-max-bp3 js-room room-has-alert" data-room="${alert.tagString}">
+            const html = `<div class="c-card c-card--clickable u-width-fit-content u-width-max-bp3 js-room room-has-alert ${alert.code == 1 ? 'room-has-alert--orange' : ''}" data-room="${alert.tagString}">
                 <p class="c-card__title">${alert.tagString}</p>
                 <ul class="o-list c-card__content c-measurements ">
                     <li class="c-measurements__item ">
@@ -105,7 +107,7 @@ export default class InnerHome {
 
     run() {
         this.domLookup();
-
+        
         this.loadAlerts();
         this.loadLocations();
     }
