@@ -16,9 +16,10 @@ export default class InnerHome {
 
             setTimeout(this.loadAlerts.bind(this), 12e4);
 
-            return;
+            return true;
         }
-        this.logout();
+        this.app.router.active.logout();
+        return false;
     }
 
     async loadLocations() {
@@ -29,7 +30,6 @@ export default class InnerHome {
 
             return;
         }
-        this.logout();
     }
 
     renderAlerts(alerts) {
@@ -105,10 +105,10 @@ export default class InnerHome {
         });
     }
 
-    run() {
+    async run() {
         this.domLookup();
         
-        this.loadAlerts();
-        this.loadLocations();
+        if (await this.loadAlerts())
+            this.loadLocations();
     }
 }
