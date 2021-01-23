@@ -123,5 +123,6 @@ export const put = (url, body = '', searchParams = {}, headers = {}, options = {
 export default {
     delete: deleteReq,
     get,
-    post
+    post,
+    put
 };
