@@ -26,6 +26,9 @@ export default class InnerSettings {
         this.co2 = {};
         this.co2.yellow = document.getElementById('co2-yellow');
         this.co2.red = document.getElementById('co2-red');
+
+        const refresh_plugs = document.querySelector('.js-refresh-plugs');
+        refresh_plugs.addEventListener('click', this.refreshPlugs.bind(this));
     }
 
     async showAdminSettings() {
@@ -44,6 +47,17 @@ export default class InnerSettings {
     showUserSettings() {
         this.email.value = this.user.email;
         this.phone.value = this.user.phone ? this.user.phone : '';
+    }
+
+    async refreshPlugs(e) {
+        e.preventDefault();
+
+        const restore = e.target.innerText;
+        e.target.innerText = 'Refreshing...';
+
+        await this.app.api.smartplugs.refresh();
+
+        e.target.innerText = restore;
     }
 
     async run() {
