@@ -7,25 +7,25 @@ export default class InnerSettings {
 
     domLookup() {
         // User Settings
+        const user_form = document.querySelector('form');
+        user_form.addEventListener('submit', this.updateUser.bind(this));
+
         this.email = document.getElementById('email');
         this.phone = document.getElementById('phone');
+        this.old_pass = document.getElementById('old-pass');
         this.new_pass = document.getElementById('new-pass');
         this.confirm_pass = document.getElementById('confirm-pass');
 
+        // Admin Settings
         this.admin_wrapper = document.querySelector('.js-settings-admin');
         const admin_form = document.querySelector('.js-settings-admin form');
         admin_form.addEventListener('submit', this.updateSettings.bind(this));
 
-        // Admin Settings
         this.oauth2_only = document.getElementById('toggle-ms-login');
 
         this.co2 = {};
         this.co2.yellow = document.getElementById('co2-yellow');
         this.co2.red = document.getElementById('co2-red');
-    }
-
-    fillUserSettings() {
-
     }
 
     async showAdminSettings() {
@@ -41,6 +41,11 @@ export default class InnerSettings {
         this.co2.red.value =  settings.config.ppmThresholds.red;
     }
 
+    showUserSettings() {
+        this.email.value = this.user.email;
+        this.phone.value = this.user.phone ? this.user.phone : '';
+    }
+
     async run() {
         this.domLookup();
 
@@ -48,7 +53,7 @@ export default class InnerSettings {
         if (!this.user) this.app.router.active.logout();
 
         this.showAdminSettings();
-        this.fillUserSettings();
+        this.showUserSettings();
     }
 
     async updateSettings(e) {
@@ -70,5 +75,42 @@ export default class InnerSettings {
             this.app.alerts.pushPopup('Saved', 'Settings have been updated.');
         else
             this.app.alerts.pushPopup('Failed', 'Do you have permission to update the settings?');
+    }
+
+    async updateUser(e) {
+        e.preventDefault();
+
+        let update = { email: this.email.value };
+
+        if (this.old_pass.value.length > 6 ||
+            this.new_pass.value.length > 6 ||
+            this.confirm_pass.value.length > 6)
+        {
+            if (this.new_pass.value !== this.confirm_pass.value) {
+                this.app.alerts.pushPopup('Profile Update', 'New Password and Confirm Password do not match.')
+
+                return;
+            }
+
+            Object.assign(update, {
+                old_password: this.old_pass.value,
+                password: this.new_pass.value 
+            });
+        }
+
+        if (this.phone.value !== '') Object.assign(update, { phone_number: this.phone.value });
+
+        const err = await this.app.api.users.update({
+            uid: this.user.uid
+        }, update);
+
+        if (!err)
+            this.app.alerts.pushPopup('Profile Update', 'Saved profile settings!');
+        else
+            this.app.alerts.pushPopup('Profile Update', err);
+
+        e.target.reset();
+
+        this.showUserSettings();
     }
 }
