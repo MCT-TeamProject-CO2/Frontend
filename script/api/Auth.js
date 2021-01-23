@@ -23,15 +23,15 @@ export default class Auth {
         };
 
         const res = await this.api.post(this.base + '/login', body);
-        if (!res.ok) return false;
+        if (!res.ok) return 'Unknown error occured while logging in.';
 
         const json = await res.json();
-        if (json.sessionId) {
-            this.api.setSession(json.sessionId);
+        if (json.succes) {
+            this.api.setSession(json.data.sessionId);
 
-            return true;
+            return null;
         }
-        return false;
+        return json.data;
     }
 
     /**
