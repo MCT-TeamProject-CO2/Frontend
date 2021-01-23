@@ -37,4 +37,24 @@ export default class Users {
             return res.json();
         return null;
     }
+
+    async update(query, update) {
+        const res = await this.api.put(this.base, {
+            query,
+            update
+        }, {}, {
+            authorization: this.api.getSession()
+        });
+
+        if (res.ok) {
+            const json = await res.json();
+
+            if (!json.success) return json.data;
+
+            this.api.user = json.data;
+
+            return null;
+        }
+        return 'The user is no longer logged in.';
+    }
 }
