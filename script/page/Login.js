@@ -32,7 +32,10 @@ export default class Login {
         const password = formData.get('password');
         const isEmail = user.includes('@');
 
-        if (await this.app.api.auth.login(user, password, isEmail))
+        const err = await this.app.api.auth.login(user, password, isEmail);
+        if (err)
+            this.app.alerts.pushPopup('Login Failure', err);
+        else
             this.app.router.navigate('home');
     }
 
