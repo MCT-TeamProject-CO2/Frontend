@@ -618,19 +618,25 @@ body {
     fill: var(--global-color-light);
 }
 
-.c-floor-map {
+.c-floorplan {
     width: 100%;
     height: 10rem;
+    display: flex;
+    justify-content: center;
+}
+
+.c-floorplan__map {
+    width: 100%;
 }
 
 @media (min-width: 768px) {
-    .c-floor-map {
+    .c-floorplan {
         height: 16rem;
     }
 }
 
 @media (min-width: 1024px) {
-    .c-floor-map {
+    .c-floorplan {
         min-height: 100%;
     }
 }
