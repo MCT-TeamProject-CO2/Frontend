@@ -1306,6 +1306,9 @@ body {
     .u-width-3-4-bp2 {
         width: 75%;
     }
+    .u-max-width-md-bp2 {
+        max-width: 30rem;
+    }
 }
 
 @media(min-width: 1024px) {
