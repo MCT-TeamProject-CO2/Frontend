@@ -7,6 +7,43 @@ export default class Users {
         return this.api.host + '/api/v1/users';
     }
 
+    async addUser(userSchema) {
+        const res = await this.api.post(this.base, userSchema, {}, {
+            authorization: this.api.getSession()
+        });
+
+        if (res.ok) return null;
+
+        switch (res.status) {
+            case 403:
+                return 'You don\'t have permission to create users.';
+
+            case 406:
+                const json = await res.json();
+                return json.message;
+        }
+    }
+
+    async disable(uid) {
+        const res = await this.api.put(this.base, {
+            query: { uid },
+            update: { disabled: true }
+        }, {}, {
+            authorization: this.api.getSession()
+        });
+
+        if (res.ok) {
+            const json = await res.json();
+
+            if (!json.success) return json.data;
+
+            this.api.user = json.data;
+
+            return null;
+        }
+        return 'The user is no longer logged in.';
+    }
+
     async get() {
         const res = await this.api.get(this.base, {}, {
             authorization: this.api.getSession()
@@ -14,7 +51,7 @@ export default class Users {
 
         if (res.ok) {
             return {
-                succes: true,
+                success: true,
                 data: await res.json()
             };
         }
@@ -22,7 +59,7 @@ export default class Users {
         switch (res.status) {
             case 403:
                 return {
-                    succes: false,
+                    success: false,
                     data: 'The user is no longer logged in.'
                 };
         }
@@ -36,6 +73,21 @@ export default class Users {
         if (res.ok)
             return res.json();
         return null;
+    }
+
+    async resetPassword(uid) {
+        const res = await this.api.post(this.base + '/reset', {
+            query: { uid }
+        }, {}, {
+            authorization: this.api.getSession()
+        });
+
+        const json = await res.json();
+        if (res.ok) {
+            if (json.success) return null;
+            return json.data;
+        }
+        return json.message;
     }
 
     async update(query, update) {

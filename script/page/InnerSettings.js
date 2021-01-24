@@ -1,8 +1,11 @@
 import { PermissionLevels } from '../util/Constants.js'
+import Users from './settings/Users.js'
 
 export default class InnerSettings {
     constructor(app) {
         this.app = app;
+
+        this.users = new Users(app);
     }
 
     domLookup() {
@@ -34,6 +37,9 @@ export default class InnerSettings {
     async showAdminSettings() {
         if (PermissionLevels.indexOf(this.user.permission) < PermissionLevels.indexOf('admin')) return;
     
+        // Only start this class after confirming the user's permission level
+        this.users.run();
+
         this.admin_wrapper.hidden = false;
 
         const settings = await this.app.api.settings.get();
