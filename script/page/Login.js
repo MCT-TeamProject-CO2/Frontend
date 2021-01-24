@@ -47,8 +47,6 @@ export default class Login {
         if (search.has('code')) {
             const code = search.get('code');
 
-            history.pushState({}, "", "/");
-
             const popup = this.app.alerts.pushPopup('Microsoft Sign-in', 'Please wait while we\'re signing you in...', false);
 
             this.app.api.auth.oauth2(code).then(([success, data]) => {
@@ -60,6 +58,8 @@ export default class Login {
                     this.app.alerts.pushPopup('Sign-in failure', data, true);
             });
         }
+
+        history.pushState({}, "", "/");
 
         this.domLookup();
     }
