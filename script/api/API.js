@@ -35,14 +35,6 @@ export default class API {
         return ApiHost;
     }
 
-    get user() {
-        return this._user;
-    }
-
-    set user(new_value) {
-        this._user = new_value;
-    }
-
     getSession() {
         return sessionStorage.getItem('session');
     }
@@ -54,9 +46,7 @@ export default class API {
         sessionStorage.setItem('session', sessionId);
     }
 
-    async getUser() {
-        if (!this.user) 
-            this.user = await this.users.me();
-        return this.user;
+    getUser() {
+        return this.users.me();
     }
 }
