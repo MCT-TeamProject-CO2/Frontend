@@ -1,6 +1,6 @@
 export default class BaseAlert {
     constructor() {
-        this._id = (Date.now() + Math.random()).toString("16");
+        this._id = (Date.now() + Math.random()).toString("16").replace('.', '');
     }
 
     get id() {
