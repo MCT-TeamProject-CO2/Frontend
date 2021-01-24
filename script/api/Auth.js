@@ -26,7 +26,7 @@ export default class Auth {
         if (!res.ok) return 'Unknown error occured while logging in.';
 
         const json = await res.json();
-        if (json.succes) {
+        if (json.success) {
             this.api.setSession(json.data.sessionId);
 
             return null;
