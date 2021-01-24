@@ -107,6 +107,14 @@ export default class Users {
 
             return null;
         }
+
+        switch (res.status) {
+            case 406:
+                const json = await res.json();
+
+                return json.message;
+        }
+
         return 'The user is no longer logged in.';
     }
 }
