@@ -32,6 +32,18 @@ export default class Users {
         this.openOverlay();
     }
 
+    async disableUser(e) {
+        e.preventDefault();
+
+        const err = await this.app.api.users.disable(document.getElementById('disable-uuid').value);
+        if (err)
+            this.app.alerts.pushPopup('Disable User Failure', err);
+        else
+            this.app.alerts.pushPopup('Disable User', 'The user\'s account has been disabled.');
+
+        this.openOverlay();
+    }
+
     domLookup() {
         const btn = document.querySelector('.js-configure-users');
         btn.addEventListener('click', this.openOverlay.bind(this));
@@ -85,7 +97,7 @@ export default class Users {
 
         this.user_config.disable.close.addEventListener('click', this.openOverlay.bind(this));
         this.user_config.disable.cancel.addEventListener('click', this.openOverlay.bind(this));
-        //this.user_config.disable.form.addEventListener('submit', this.disableUser.bind(this));
+        this.user_config.disable.form.addEventListener('submit', this.disableUser.bind(this));
     }
 
     openAddUserOverlay(e) {
