@@ -134,8 +134,6 @@ export default class Users {
             this.renderUsers(data);
         else
             this.renderUsers([]);
-
-        this._active = this.user_config.base;
     }
 
     openUserResetOverlay(e) {
