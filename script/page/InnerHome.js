@@ -33,9 +33,9 @@ export default class InnerHome {
     }
 
     renderAlerts(alerts) {
-        this.alerts_wrapper.innerHTML = alerts.length === 0
-            ? '<p>There are no active alerts.</p>'
-            : '';
+        this.alerts_wrapper.innerHTML = alerts.length === 0 ?
+            '<p>There are no active alerts.</p>' :
+            '';
 
         alerts.forEach(alert => {
             const date = new Date(alert.updatedAt);
@@ -71,7 +71,7 @@ export default class InnerHome {
         this.location_wrapper.innerHTML = '';
 
         locations.forEach((location) => {
-            const html = `<div class="c-card u-width-fit-content-bp1">
+            const html = `<div class="c-card u-max-width-sm-bp1">
                 <p class="c-card__title">${location.name}</p>
                 <ul class="o-list c-card__content">
                     <li class="c-floor has-alert">
@@ -107,7 +107,7 @@ export default class InnerHome {
 
     async run() {
         this.domLookup();
-        
+
         if (await this.loadAlerts())
             this.loadLocations();
     }

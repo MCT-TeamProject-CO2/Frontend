@@ -101,7 +101,8 @@ export default class Users {
     }
 
     openAddUserOverlay(e) {
-        e?.preventDefault();
+        if (e) { e.preventDefault(); }
+
 
         this.user_config.add.popup.hidden = false;
         this.user_config.reset.popup.hidden = true;
@@ -110,7 +111,8 @@ export default class Users {
     }
 
     openDisableUserOverlay(e) {
-        e?.preventDefault();
+        if (e) { e.preventDefault(); }
+
 
         this.user_config.add.popup.hidden = true;
         this.user_config.reset.popup.hidden = true;
@@ -119,7 +121,8 @@ export default class Users {
     }
 
     async openOverlay(e) {
-        e?.preventDefault();
+        if (e) { e.preventDefault(); }
+
 
         this.user_config.add.popup.hidden = true;
         this.user_config.reset.popup.hidden = true;
@@ -136,7 +139,7 @@ export default class Users {
     }
 
     openUserResetOverlay(e) {
-        e?.preventDefault();
+        if (e) { e.preventDefault(); }
 
         this.user_config.add.popup.hidden = true;
         this.user_config.reset.popup.hidden = false;
@@ -148,7 +151,7 @@ export default class Users {
         this.user_config.base.wrapper.innerHTML = data.length === 0 ? 'No users found.' : '';
 
         data.forEach(user => {
-            const html = `<div class="c-card u-width-fit-content-bp2" id="${user.uid}">
+            const html = `<div class="c-card u-max-width-sm-bp1" id="${user.uid}">
                 <p class="c-card__title">${user.email}</p>
                 <div class="c-card__content">
                     <button class="o-button-reset c-button js-reset-password" type="button">Reset password</button>

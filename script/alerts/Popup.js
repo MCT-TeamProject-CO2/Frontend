@@ -41,7 +41,7 @@ export default class Popup extends BaseAlert {
 
     push() {
         document.body.insertAdjacentHTML('beforeend', `<section class="c-popup" id="${this.id}">
-            <div class="c-card u-width-max u-width-fit-content-bp1">
+            <div class="c-card u-width-max u-max-width-lg-bp2">
                 <p class="c-card__title">
                     ${this.title}
                     <button class="o-button-reset c-popup-close">
