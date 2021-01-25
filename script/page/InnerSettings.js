@@ -1,10 +1,12 @@
 import { PermissionLevels } from '../util/Constants.js'
+import Locations from './settings/Locations.js'
 import Users from './settings/Users.js'
 
 export default class InnerSettings {
     constructor(app) {
         this.app = app;
 
+        this.locations = new Locations(app);
         this.users = new Users(app);
     }
 
@@ -38,6 +40,7 @@ export default class InnerSettings {
         if (PermissionLevels.indexOf(this.user.permission) < PermissionLevels.indexOf('admin')) return;
     
         // Only start this class after confirming the user's permission level
+        this.locations.run();
         this.users.run();
 
         this.admin_wrapper.hidden = false;
