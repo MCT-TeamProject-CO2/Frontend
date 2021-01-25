@@ -29,16 +29,37 @@ export default class Locations {
         }
     }
 
+    async createFormData(formData) {
+        if (!formData instanceof FormData) throw new Error('No FormData instance was passed.');
+
+        const res = await this.api.post(this.base, formData, {}, {
+            'authorization': this.api.getSession()
+        });
+
+        if (res.ok) return { succes: true, message: null };
+
+        switch (res.status) {
+            case 400:
+                return { succes: false, message: 'Empty request body.' };
+
+            case 403:
+                return { succes: false, message: 'Session invalid, log-in again.' };
+
+            case 406:
+                return { succes: false, message: 'Invalid request body, required properties might be missing.' };
+        
+            default:
+                return { succes: false, message: 'Unknown error occured when creating location.' };
+        }
+    }
+
     async getAll() {
         const res = await this.api.get(this.base, {}, {
             authorization: this.api.getSession()
         });
 
-        if (res.ok) return {
-                succes: true,
-                data: await res.json()
-            };
-        return { succes: false, data: null };
+        if (res.ok) return res.json();
+        return null;
     }
 
     async update(query, update) {
@@ -47,6 +68,32 @@ export default class Locations {
             update
         }, {}, {
             authorization: this.api.getSession()
+        });
+
+        if (res.ok) {
+            return { succes: true, new: await res.json() };
+        }
+
+        switch (res.status) {
+            case 400:
+                return { succes: false, message: 'Empty request body or required data was missing.' };
+
+            case 403:
+                return { succes: false, message: 'Session invalid, log-in again.' };
+
+            case 406:
+                return { succes: false, message: 'Invalid request body, required properties might be missing.' };
+        
+            default:
+                return { succes: false, message: 'Unknown error occured when creating location.' };
+        }
+    }
+
+    async updateFormData(formData) {
+        if (!formData instanceof FormData) throw new Error('No FormData instance was passed.');
+
+        const res = await this.api.put(this.base, formData, {}, {
+            'authorization': this.api.getSession()
         });
 
         if (res.ok) {
