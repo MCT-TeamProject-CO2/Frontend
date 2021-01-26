@@ -30,7 +30,11 @@ export default class Locations {
 
         const formData = new FormData(e.target);
 
+        const popup = this.app.alerts.pushPopup('Creating Location', 'This might take a while...', false);
+
         await this.app.api.locations.createFormData(formData);
+
+        popup.close();
 
         this.openOverlay();
     }
@@ -61,12 +65,21 @@ export default class Locations {
                 cancel: document.querySelector('.js-popup-locationsconfig--edit .c-button--grey'),
                 form: document.querySelector('.js-popup-locationsconfig--edit form'),
                 add: document.querySelector('.js-popup-locationsconfig--edit form .c-dropzone__add')
+            },
+            remove: {
+                popup: document.querySelector('.js-popup-locationsconfig--remove'),
+                wrapper: document.querySelector('.js-popup-locationsconfig--remove .c-popup__content'),
+                close: document.querySelector('.js-popup-locationsconfig--remove .c-popup-close'),
+                cancel: document.querySelector('.js-popup-locationsconfig--remove .c-button--grey'),
+                form: document.querySelector('.js-popup-locationsconfig--remove form')
             }
         };
 
         this.location_config.base.close.addEventListener('click', () => {
             this.location_config.base.popup.hidden = true;
             this.location_config.add.popup.hidden = true;
+            this.location_config.edit.popup.hidden = true;
+            this.location_config.remove.popup.hidden = true;
         });
 
         this.location_config.base.add.addEventListener('click', this.openLocationAddOverlay.bind(this));
@@ -80,6 +93,10 @@ export default class Locations {
         this.location_config.edit.cancel.addEventListener('click', this.openOverlay.bind(this));
         this.location_config.edit.form.addEventListener('submit', this.updateLocation.bind(this));
         this.location_config.edit.add.addEventListener('click', this.addFloor.bind(this));
+
+        this.location_config.remove.close.addEventListener('click', this.openOverlay.bind(this));
+        this.location_config.remove.cancel.addEventListener('click', this.openOverlay.bind(this));
+        this.location_config.remove.form.addEventListener('submit', this.removeLocation.bind(this));
     }
 
     openLocationAddOverlay(e) {
@@ -88,6 +105,7 @@ export default class Locations {
         this.location_config.base.popup.hidden = true;
         this.location_config.add.popup.hidden = false;
         this.location_config.edit.popup.hidden = true;
+        this.location_config.remove.popup.hidden = true;
 
         const floor_wrapper = document.querySelector('.js-popup-locationsconfig--add .c-dropzone');
         [...floor_wrapper.children].forEach(el => el.classList.contains('remove') ? el.remove() : null);
@@ -101,6 +119,7 @@ export default class Locations {
         this.location_config.base.popup.hidden = true;
         this.location_config.add.popup.hidden = true;
         this.location_config.edit.popup.hidden = false;
+        this.location_config.remove.popup.hidden = true;
 
         document.getElementById('building-id').value = location._id;
         document.getElementById('building-name--edit').value = location.name;
@@ -130,12 +149,22 @@ export default class Locations {
         floor_wrapper.insertAdjacentHTML('afterbegin', html);
     }
 
+    openLocationRemoveOverlay(e) {
+        e?.preventDefault();
+
+        this.location_config.base.popup.hidden = true;
+        this.location_config.add.popup.hidden = true;
+        this.location_config.edit.popup.hidden = true;
+        this.location_config.remove.popup.hidden = false;
+    }
+
     async openOverlay(e) {
         if (e) { e.preventDefault(); }
 
         this.location_config.base.popup.hidden = false;
         this.location_config.add.popup.hidden = true;
         this.location_config.edit.popup.hidden = true;
+        this.location_config.remove.popup.hidden = true;
 
         const data = await this.app.api.locations.getAll();
         if (data)
@@ -186,6 +215,16 @@ export default class Locations {
 
             this.location_config.base.wrapper.insertAdjacentHTML('beforeend', html);
 
+            const floorRemoveBtns = document.querySelectorAll('.c-floor__icon--delete');
+            floorRemoveBtns.forEach(floorRemoveBtn => floorRemoveBtn.addEventListener('click', this.removeFloor.bind(this)));
+
+            const btnRemove = document.querySelector(`#${CSS.escape(location._id)} .c-card__icon--delete`);
+            btnRemove.addEventListener('click', () => {
+                this._activeLocation = location;
+
+                this.openLocationRemoveOverlay();
+            })
+
             const btnEdit = document.querySelector(`#${CSS.escape(location._id)} .c-card__icon--edit`);
             btnEdit.addEventListener('click', () => {
                 this._activeLocation = location;
@@ -195,6 +234,38 @@ export default class Locations {
 
             const btnAdd = document.querySelector(`#${CSS.escape(location._id)} .c-card__icon--delete`);
         });
+    }
+
+    async removeFloor(e) {
+        e.preventDefault();
+
+        let el = e.target;
+        while (!el.classList.contains('js-btn-floor'))
+            el = el.parentElement;
+
+        const popup = this.app.alerts.pushPopup('Removing Floor', 'Please be patient...', false);
+
+        const err = await this.app.api.locations.deleteFloorPlan(el.dataset.location, el.dataset.floor);
+
+        popup.close();
+
+        if (err)
+            this.app.alerts.pushPopup('Floor Removal Failure', err);
+
+        this.openOverlay();
+    }
+
+    async removeLocation(e) {
+        e.preventDefault();
+
+        const err = await this.app.api.locations.deleteLocation({
+            _id: this._activeLocation._id,
+        });
+
+        if (err)
+            this.app.alerts.pushPopup('Location Removal Failure', err);
+
+        this.openOverlay();
     }
 
     run() {

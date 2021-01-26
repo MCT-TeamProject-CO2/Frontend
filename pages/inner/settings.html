@@ -391,11 +391,11 @@
             </div>
         </div>
     </div>
-    
-    <div class="c-popup js-popup-locationsconfig--confirm" hidden>
+
+    <div class="c-popup js-popup-locationsconfig--remove" hidden>
         <div class="c-card u-width-3-4-bp2 u-width-half-bp3">
             <p class="c-card__title">
-                <span class="js-confirm--title"></span>
+                Remove location
                 <button class="o-button-reset c-popup-close">
                     <svg class="c-popup-close__icon" id="close-24px" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path id="Path_107" data-name="Path 107" d="M0,0H24V24H0Z" fill="none"/>
@@ -405,11 +405,13 @@
             </p>
     
             <div class="c-card__content u-flex-align-center">
-                <form class="c-form u-width-half-bp2" method="POST" class="c-login__form">
+                <form class="c-form u-width-half-bp2" method="DELETE" class="c-login__form">
+                    <p>Are you sure you want to remove this location?</p>
+    
                     <div class="c-form__section">
                         <div class="c-buttons">
-                            <button class="o-button-reset c-button c-button--red" type="submit">{action}</button>
-                            <button class="o-button-reset c-button c-button--grey" type="submit">Cancel</button>
+                            <button class="o-button-reset u-width-half c-button c-button--red" type="submit">Confirm</button>
+                            <button class="o-button-reset u-width-half c-button c-button--grey" type="submit">Cancel</button>
                         </div>
                     </div>
                 </form>

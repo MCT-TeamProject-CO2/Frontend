@@ -53,6 +53,49 @@ export default class Locations {
         }
     }
 
+    async deleteLocation(q) {
+        const res = await this.api.delete(this.base, q, {}, {
+            authorization: this.api.getSession()
+        });
+
+        if (res.ok) return null;
+
+        switch (res.status) {
+            case 400:
+                return 'Empty request body.';
+        
+            case 403:
+                return 'Session invalid, log-in again.';
+
+            case 406:
+                return (await res.json).message;
+        }
+        return 'Unknown error occured.';
+    }
+
+    async deleteFloorPlan(tag, floor) {
+        const res = await this.api.delete(this.base + '/floor', {
+            tag,
+            floor
+        }, {}, {
+            authorization: this.api.getSession()
+        });
+
+        if (res.ok) return null;
+
+        switch (res.status) {
+            case 400:
+                return 'Empty response body or certain required body properties were missing.';
+
+            case 403:
+                return 'Sesion invalid, log-in again.';
+        
+            case 406:
+                return (await res.json).message;
+        }
+        return 'Unknown error occured.';
+    }
+
     async get(tag) {
         const res = await this.api.get(this.base, { tag }, {
             authorization: this.api.getSession()
