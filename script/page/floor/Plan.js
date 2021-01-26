@@ -210,7 +210,7 @@ export default class Plan {
 
                 // scroll when hover over plan not card
                 if (target.parentElement.nodeName == "svg" && result[i].parentElement.nodeName != "svg") {
-                    result[i].scrollIntoView();
+                    result[i].scrollIntoView(false);
                 }
             }
         }
