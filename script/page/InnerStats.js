@@ -6,6 +6,14 @@ export default class InnerStats {
     domLookup() {
         this.graph_wrapper = document.querySelector('.js-graph');
         this.datalist = document.getElementById('rooms');
+
+        const timeType = document.querySelector('.js-time-type');
+        timeType.addEventListener('change', this.onTimeTypeChange.bind(this));
+
+        this.time = {
+            start: document.getElementById('time-start'),
+            end: document.getElementById('time-end')
+        };
     }
 
     getData() {
@@ -34,6 +42,21 @@ export default class InnerStats {
         results.forEach(result => {
             this.datalist.innerHTML += '<option value="'+ result + '"/>';
         });
+    }
+
+    onTimeTypeChange(e) {
+        e.preventDefault();
+
+        const el = e.target;
+
+        if (el.value == -1) {
+            this.time.start.parentElement.parentElement.hidden = false;
+            this.time.end.parentElement.parentElement.hidden = false;
+        }
+        else {
+            this.time.start.parentElement.parentElement.hidden = true;
+            this.time.end.parentElement.parentElement.hidden = true;
+        }
     }
 
     renderChart(dataType, data) {
