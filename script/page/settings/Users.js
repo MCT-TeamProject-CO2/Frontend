@@ -1,3 +1,5 @@
+import { PermissionLevels } from '../../util/Constants.js';
+
 export default class Users {
     constructor(app) {
         this.app = app;
@@ -7,6 +9,10 @@ export default class Users {
         e.preventDefault();
 
         const formData = new FormData(e.target);
+
+        const currUser = await this.app.api.users.me();
+        if (PermissionLevels.indexOf(currUser.permission) < PermissionLevels.indexOf(formData.get('permission-level')))
+            return this.app.alerts.pushPopup('User Creation Failure', 'The permission level selected for the user is higher than your own.')
 
         const userSchema = this.oauth2_disabled.checked
             ? {
