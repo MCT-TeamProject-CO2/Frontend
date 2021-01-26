@@ -4,8 +4,6 @@ import InnerSettings from './InnerSettings.js'
 import InnerStats from './InnerStats.js'
 
 export default class Home {
-    _active;
-
     constructor(app) {
         this.app = app;
 
@@ -13,10 +11,6 @@ export default class Home {
         this.app.router.registerInner('home', new InnerHome(app));
         this.app.router.registerInner('settings', new InnerSettings(app));
         this.app.router.registerInner('stats', new InnerStats(app));
-    }
-
-    get active() {
-        return this._active;
     }
 
     domLookUp() {
@@ -35,21 +29,19 @@ export default class Home {
     }
 
     navItemClicked(e) {
+        e.preventDefault();
+
         const el = e.currentTarget;
 
-        if (this.active == el.dataset.pageType) return;
+        if (this.app.router.innerPath == el.dataset.pageType) return;
 
-        this._active = el.dataset.pageType;
-
-        switch (this._active) {
+        switch (el.dataset.pageType) {
             case 'logout':
-                e.preventDefault();
-
                 history.pushState({}, "", "/");
 
                 return this.logout();
             default:
-                this.app.router.navigateInner(this._active);
+                this.app.router.navigateInner(el.dataset.pageType);
 
                 break;
         }

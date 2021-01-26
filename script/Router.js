@@ -76,9 +76,9 @@ export default class Router {
     async navigateInner(path) {
         path = this._updateSearch(path);
 
-        document.title = 'AirMonitor | ' + path;
-
         const contents = await this.prepare('inner/' + path);
+
+        this.innerPath = path;
 
         const inner = document.querySelector('.c-app__main');
         if (!inner) {
@@ -90,6 +90,9 @@ export default class Router {
             return;
         }
         inner.outerHTML = contents;
+
+        document.title = 'AirMonitor | ' + path;
+        history.pushState({}, "null", '/#/' + path + (this._search ? this._search : ''));
 
         if (this._el) this._el.classList.remove('c-main-nav__item--current');
         this._el = document.querySelector(`[href="/#/${path}"]`)?.parentElement;
