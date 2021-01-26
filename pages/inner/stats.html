@@ -11,7 +11,7 @@
     <div class="c-main-section u-x-span-6 u-x-5-span-2-bp3 u-y-1-span-max-bp3">
         <h2 class="c-main-section__title">Filter</h2>
         <div class="c-main-section__content u-flex-direction-column">
-            <form action="GET" class="c-form">
+            <form method="GET" class="c-form">
                 <div class="c-input c-search">
                     <input type="text" class="c-input__field" placeholder="Search for a room." list="rooms" name="room-search" id="room-search">
                     <datalist id="rooms">
@@ -28,10 +28,10 @@
                     <label for="select-type">Measurement type</label>
                     <span class="c-input__custom">
                         <select class="c-input__field js-select-type" name="select-type" id="select-type">
-                            <option value="0">Temperature</option>
-                            <option value="1">Humidity</option>
-                            <option value="2">TVOC</option>
-                            <option value="3">CO<sub>2</sub></option>
+                            <option value="co2eq_ppm">CO<sub>2</sub></option>
+                            <option value="humidity">Humidity</option>
+                            <option value="temperature">Temperature</option>
+                            <option value="tvoc_ppb">TVOC</option>
                         </select>
                         <svg class="c-input__symbol" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"/></svg>
                     </span>
@@ -41,11 +41,12 @@
                     <span class="c-input__custom">
                         <select class="c-input__field js-time-type" name="time-type" id="select-type">
                             <option value="-1">Custom Time Range</option>
-                            <option value="0" selected>Today</option>
-                            <option value="1">Last Week</option>
-                            <option value="2">Last Month</option>
-                            <option value="3">6 Months</option>
-                            <option value="4">1 year</option>
+                            <option value="0">Past Hour</option>
+                            <option value="1" selected>Past 24h</option>
+                            <option value="2">Past Week</option>
+                            <option value="3">Last Month</option>
+                            <option value="4">6 Months</option>
+                            <option value="5">1 year</option>
                         </select>
                         <svg class="c-input__symbol" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"/></svg>
                     </span>
@@ -80,19 +81,19 @@
                 <ul class="c-card__content c-measurements ">
                     <li class="c-measurements__item ">
                         <p>Humidity</p>
-                        <p>90.921%</p>
+                        <p>- %</p>
                     </li>
                     <li class="c-measurements__item ">
                         <p>Temperature</p>
-                        <p>26.59 C</p>
+                        <p>- °C</p>
                     </li>
                     <li class="c-measurements__item ">
                         <p>CO2</p>
-                        <p>446 ppm</p>
+                        <p>- ppm</p>
                     </li>
                     <li class="c-measurements__item ">
                         <p>TVOC</p>
-                        <p>7 ppb</p>
+                        <p>- ppb</p>
                     </li>
                 </ul>
             </div>

@@ -12,15 +12,17 @@ export default class Measurements {
      * @param {string} tagString The identifier of the room
      * @param {number} [delta = 10] The delta in minutes to fetch data for
      * @param {Array<string>} [fields = []] An array of strings to filter which fields to return
+     * @param {string} [aggregate = '5s'] Group data by an interval (s, m, d, ...)
      * @param {boolean} [mean = true] If the results should be returned as their mean values or not
      */
-    async getDelta(tagString, delta = 10, fields = [], mean = true) {
+    async getDelta(tagString, delta = 10, fields = [], aggregate = '5s', mean = true) {
         fields = fields.join(',');
 
         const res = await this.api.get(this.base, {
             tagString,
             delta,
             fields,
+            aggregate,
             mean
         }, {
             authorization: this.api.getSession()
@@ -36,9 +38,10 @@ export default class Measurements {
      * @param {Date} start The start date to fetch data from
      * @param {Date} end the end date to fetch data from
      * @param {Array<string>} [fields = []] An array of strings to filter which fields to return
+     * @param {string} [aggregate = '5s'] Group data by an interval (s, m, d, ...)
      * @param {boolean} [mean = true] If the results should be returned as tehir mean values or not
      */
-    async getTimeRange(tagString, start, end, fields = [], mean = true) {
+    async getTimeRange(tagString, start, end, fields = [], aggregate = '5s', mean = true) {
         fields = fields.join(',');
         start = start.getTime();
         end = end.getTime();
@@ -48,6 +51,7 @@ export default class Measurements {
             start,
             end,
             fields,
+            aggregate,
             mean
         }, {
             authorization: this.api.getSession()
