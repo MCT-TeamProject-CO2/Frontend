@@ -39,7 +39,7 @@
                 <div class="c-input">
                     <label for="select-type">Time</label>
                     <span class="c-input__custom">
-                        <select class="c-input__field js-select-type" name="time-type" id="select-type">
+                        <select class="c-input__field js-time-type" name="time-type" id="select-type">
                             <option value="-1">Custom Time Range</option>
                             <option value="0" selected>Today</option>
                             <option value="1">Last Week</option>
@@ -50,7 +50,7 @@
                         <svg class="c-input__symbol" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"/></svg>
                     </span>
                 </div>
-                <div class="c-input">
+                <div class="c-input" hidden>
                     <label for="time-start">Start time</label>
                     <span class="c-input__custom">
                         <input class="c-input__field" type="datetime-local" name="time-start" id="time-start">
@@ -61,7 +61,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="c-input">
+                <div class="c-input" hidden>
                     <label for="time-start">End time</label>
                     <span class="c-input__custom">
                         <input type="datetime-local" class="c-input__field" name="time-end" id="time-end">
