@@ -28,10 +28,24 @@
                     <label for="select-type">Measurement type</label>
                     <span class="c-input__custom">
                         <select class="c-input__field js-select-type" name="select-type" id="select-type">
-                            <option value="temperature">Temperature</option>
-                            <option value="humidity">Humidity</option>
-                            <option value="tvoc ppb">TVOC</option>
-                            <option value="CO2 ppm">CO<sub>2</sub></option>
+                            <option value="0">Temperature</option>
+                            <option value="1">Humidity</option>
+                            <option value="2">TVOC</option>
+                            <option value="3">CO<sub>2</sub></option>
+                        </select>
+                        <svg class="c-input__symbol" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"/></svg>
+                    </span>
+                </div>
+                <div class="c-input">
+                    <label for="select-type">Time</label>
+                    <span class="c-input__custom">
+                        <select class="c-input__field js-select-type" name="time-type" id="select-type">
+                            <option value="-1">Custom Time Range</option>
+                            <option value="0" selected>Today</option>
+                            <option value="1">Last Week</option>
+                            <option value="2">Last Month</option>
+                            <option value="3">6 Months</option>
+                            <option value="4">1 year</option>
                         </select>
                         <svg class="c-input__symbol" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"/></svg>
                     </span>
