@@ -8,6 +8,16 @@ export default class InnerHome {
         this.alerts_wrapper = document.querySelector('.js-alerts');
     }
 
+    floorClick(e) {
+        e?.preventDefault();
+
+        let el = e.target;
+        while (!el.classList.contains('js-btn-floor'))
+            el = el.parentElement;
+        
+        this.app.router.navigateInner(`floor?location=${el.dataset.location}&floor=${el.dataset.floor}`);
+    }
+
     async loadAlerts() {
         const { succes, data } = await this.app.api.alerts.get();
 
@@ -73,7 +83,7 @@ export default class InnerHome {
                 
             location.floor_plans.forEach(floorPlan => {
                 html += `<li class="c-floor">
-                    <button class="c-floor__btn o-button-reset js-btn-floor" data-floor="${floorPlan.tag}">
+                    <button class="c-floor__btn o-button-reset js-btn-floor" data-location="${location.tag}" data-floor="${floorPlan.tag}">
                         <p class="c-floor__text ">Floor ${floorPlan.tag}</p>
                         <svg class="c-floor__icon " id="arrow_rounded " data-name="arrow rounded " xmlns="http://www.w3.org/2000/svg " width="6.585 " height="11.175 " viewBox="0 0 6.585 11.175 ">
                             <path id="keyboard_arrow_right-24px " d="M9.29,15.88,13.17,12,9.29,8.12A1,1,0,0,1,10.7,6.71l4.59,4.59a1,1,0,0,1,0,1.41L10.7,17.3a1,1,0,0,1-1.41,0,1.017,1.017,0,0,1,0-1.42Z" transform="translate(-8.997 -6.418) "/>
@@ -86,6 +96,9 @@ export default class InnerHome {
 
             this.location_wrapper.insertAdjacentHTML('beforeend', html);
         });
+
+        const floorBtns = document.querySelectorAll('.js-btn-floor');
+        floorBtns.forEach(floorBtn => floorBtn.addEventListener('click', this.floorClick.bind(this)));
     }
 
     async run() {
