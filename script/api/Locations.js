@@ -53,6 +53,15 @@ export default class Locations {
         }
     }
 
+    async get(tag) {
+        const res = await this.api.get(this.base, { tag }, {
+            authorization: this.api.getSession()
+        });
+
+        if (res.ok) return res.json();
+        return null;
+    }
+
     async getAll() {
         const res = await this.api.get(this.base, {}, {
             authorization: this.api.getSession()
@@ -60,6 +69,14 @@ export default class Locations {
 
         if (res.ok) return res.json();
         return null;
+    }
+
+    async getSVG(id) {
+        const res = await this.api.get(this.base + '/svg', { id }, {
+            authorization: this.api.getSession()
+        });
+
+        return res.text();
     }
 
     async update(query, update) {

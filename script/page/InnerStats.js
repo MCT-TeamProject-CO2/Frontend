@@ -245,7 +245,7 @@ export default class InnerStats {
     async updateRoomCard(room) {
         this.room.title.innerHTML = room;
 
-        const result = await this.app.api.measurements.getDelta(room, 1, ['co2eq_ppm', 'humidity', 'temperature', 'tvoc_ppb'], '1m');
+        const result = await this.app.api.measurements.getDelta(room, 1, ['co2eq_ppm', 'humidity', 'temperature', 'tvoc_ppb'], '2m');
 
         if (!result || !result[room]) {
             this.room.measurements.innerHTML = '<li><p>No recent data available for this room.</p></li>'

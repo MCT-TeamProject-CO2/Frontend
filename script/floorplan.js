@@ -4,7 +4,7 @@ document.addEventListener(
     function(e) {
         // get target
         e = e || window.event;
-        var target = e.target || e.srcElement;
+        var target = e.target;
 
         // check if target has the room data attribute
         if (target.dataset.hasOwnProperty("room")) {
@@ -37,7 +37,7 @@ document.addEventListener(
     function(e) {
         // get target
         e = e || window.event;
-        var target = e.target || e.srcElement;
+        var target = e.target;
 
         // check if target has the room data attribute
         if (target.dataset.hasOwnProperty("room")) {

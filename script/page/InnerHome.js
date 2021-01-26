@@ -99,6 +99,8 @@ export default class InnerHome {
 
         const floorBtns = document.querySelectorAll('.js-btn-floor');
         floorBtns.forEach(floorBtn => floorBtn.addEventListener('click', this.floorClick.bind(this)));
+
+        this.locations = locations;
     }
 
     async run() {
