@@ -44,8 +44,8 @@ export default class InnerFloor {
         this.floorPlan.innerHTML = '<p>This location does not have any floors registered with their respective floor plans.';
     }
 
-    renderLocation(locations) {
-        this.location = locations[0];
+    renderLocation(location) {
+        this.location = location;
         // Async
         this.loadSVG(this.location.floor_plans.find(floorPlan => floorPlan.tag == this.floor));
 
