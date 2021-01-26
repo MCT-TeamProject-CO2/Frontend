@@ -33,14 +33,14 @@ export default class InnerFloor {
 
             if (svg) {
                 svg.classList.add('js-floorplan');
+                svg.classList.add('c-floorplan__map');
 
                 this.plan.run();
-            }
-            else this.floorPlan.innerHTML = '<p>This location does not have a floor plan assigend to it.';
+            } else this.floorPlan.innerHTML = '<p>This location does not have a floor plan assigend to it.';
 
             return;
         }
-        
+
         this.floorPlan.innerHTML = '<p>This location does not have any floors registered with their respective floor plans.';
     }
 
@@ -58,7 +58,7 @@ export default class InnerFloor {
         for (const tagString in rooms) {
             if (Object.hasOwnProperty.call(rooms, tagString)) {
                 const room = rooms[tagString];
-                
+
                 const data = {};
                 for (const obj of room)
                     data[obj._field] = obj._value;
