@@ -1,4 +1,4 @@
-export default class SmartPlugs {
+export default class Measurements {
     constructor(api) {
         this.api = api;
     }
@@ -22,6 +22,8 @@ export default class SmartPlugs {
             delta,
             fields,
             mean
+        }, {
+            authorization: this.api.getSession()
         });
 
         if (res.ok) return res.json();
@@ -47,6 +49,8 @@ export default class SmartPlugs {
             end,
             fields,
             mean
+        }, {
+            authorization: this.api.getSession()
         });
 
         if (res.ok) return res.json();
