@@ -37,13 +37,11 @@ export default class Router {
     _updateSearch(path) {
         const split_path = path.split('?');
 
-        this._search = split_path[1];
+        this._search = split_path[1] ? '?' + split_path[1] : '';
         return split_path[0];
     }
 
     async prepare(path) {
-        path = this._updateSearch(path);
-
         if (this._cache.has(path)) {
             const fileString = this._cache.get(path);
             if (fileString instanceof Promise)
@@ -92,7 +90,7 @@ export default class Router {
         inner.outerHTML = contents;
 
         document.title = 'AirMonitor | ' + path;
-        history.pushState({}, "null", '/#/' + path + (this._search ? this._search : ''));
+        history.pushState({}, "null", '/#/' + path + this._search);
 
         if (this._el) this._el.classList.remove('c-main-nav__item--current');
         this._el = document.querySelector(`[href="/#/${path}"]`)?.parentElement;
