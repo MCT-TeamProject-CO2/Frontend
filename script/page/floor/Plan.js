@@ -45,11 +45,11 @@ export default class Plan {
         svg.addEventListener("wheel", (event) => {
             // makes sure the page doesn't try to reset itself
             event.preventDefault();
-    
+
             // create variables
             var normalized;
             var delta = event.wheelDelta;
-    
+
             // calculate scale value
             if (delta) {
                 normalized = delta % 120 == 0 ? delta / 120 : delta / 12;
@@ -59,13 +59,13 @@ export default class Plan {
             }
             var scaleDelta =
                 normalized > 0 ? 1 / zoom.scaleFactor : zoom.scaleFactor;
-    
+
             // update point values
             point.x = event.clientX;
             point.y = event.clientY;
-    
+
             var startPoint = point.matrixTransform(svg.getScreenCTM().inverse());
-    
+
             var fromVars = {
                 ease: zoom.ease,
                 x: viewBox.x,
@@ -73,66 +73,66 @@ export default class Plan {
                 width: viewBox.width,
                 height: viewBox.height,
             };
-    
+
             // update viewbox
             viewBox.x -= (startPoint.x - viewBox.x) * (scaleDelta - 1);
             viewBox.y -= (startPoint.y - viewBox.y) * (scaleDelta - 1);
             viewBox.width *= scaleDelta;
             viewBox.height *= scaleDelta;
-    
+
             zoom.animation = TweenLite.from(viewBox, zoom.duration, fromVars);
         });
-    
+
         // SELECT DRAGGABLE
         // ===========================================================================
         function selectDraggable(event) {
             if (resetAnimation.isActive()) {
                 resetAnimation.kill();
             }
-    
+
             // update startclient values to current mouse position
             startClient.x = this.pointerX;
             startClient.y = this.pointerY;
             startGlobal = startClient.matrixTransform(
                 svg.getScreenCTM().inverse()
             );
-    
+
             // Left mouse button
             if (event.button === 0) {
                 TweenLite.set(proxy, {
                     x: this.pointerX,
                     y: this.pointerY,
                 });
-    
+
                 pannable.enable().update().startDrag(event);
                 pivotAnimation.reverse();
             }
         }
-    
+
         // UPDATE VIEWBOX
         // ===========================================================================
         function updateViewBox() {
             if (zoom.animation.isActive()) {
                 return;
             }
-    
+
             point.x = this.x;
             point.y = this.y;
-    
+
             var moveGlobal = point.matrixTransform(svg.getScreenCTM().inverse());
-    
+
             // move to current position
-    
+
             let deltaX = moveGlobal.x - startGlobal.x;
             let deltaY = moveGlobal.y - startGlobal.y;
-    
+
             viewBox.x -= deltaX;
             viewBox.y -= deltaY;
         }
-    
+
         const rooms = document.querySelectorAll(".js-room");
         const floorplan = document.querySelector(".js-floorplan");
-    
+
         for (const room of rooms) {
             room.addEventListener("mouseover", () => {
                 resetHighlight();
@@ -140,10 +140,10 @@ export default class Plan {
             });
 
             setFill(room.dataset.room);
-    
+
             room.addEventListener("click", () => { centerOnRoom(room.dataset.room); });
         }
-    
+
         function setFill(roomName) {
             const room = floorplan.querySelector(`svg [data-room = "${roomName}"]`);
             room.style.fill = 'var(--global-color-blue-howest)';
@@ -153,20 +153,20 @@ export default class Plan {
         //move to room on click
         function centerOnRoom(roomName) {
             const room = floorplan.querySelector(`[data-room = "${roomName}"]`);
-    
+
             let movX = room.x.baseVal.value - viewBox.width / 2 + room.width.baseVal.value / 2;
             let movY = room.y.baseVal.value - viewBox.height / 2 + room.height.baseVal.value / 2;
-    
+
             viewBox.x = movX;
             viewBox.y = movY;
         }
-    
+
         // highlight room on map
         function showRoom(roomName) {
             resetHighlight();
             const room = floorplan.querySelector(`svg [data-room = "${roomName}"]`);
             room.classList.add("room-hover");
-            room.style.fillOpacity = 0.5;
+            room.style.fillOpacity = 0.1;
         }
     }
 
