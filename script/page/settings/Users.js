@@ -8,19 +8,23 @@ export default class Users {
 
         const formData = new FormData(e.target);
 
-        const userSchema = {
-            email: formData.get('email'),
-            type: 'normal',
-            username: formData.get('username-email'),
-            phone_number: formData.get('phone'),
-            password: formData.get('password')
-        };
+        const userSchema = this.oauth2_disabled.checked
+            ? {
+                email: formData.get('email'),
+                type: 'oauth2',
+                permission: formData.get('permission-level')
+            }
+            : {
+                email: formData.get('email'),
+                type: 'normal',
+                username: formData.get('username-email'),
+                password: formData.get('password'),
+                permission: formData.get('permission-level')
+            };
 
-        if (userSchema.password != formData.get('password-confirm')) {
-            this.app.alerts.pushPopup('Add User Failure', 'The password and confirm password fields do not match.');
-
-            return;
-        }
+        const phone_number = formData.get('phone');
+        if (phone_number && phone_number.length > 4)
+            Object.assign(userSchema, { phone_number });
 
         const err = await this.app.api.users.addUser(userSchema);
 
@@ -30,6 +34,14 @@ export default class Users {
             this.app.alerts.pushPopup('User Created', 'User created successfully!');
 
         this.openOverlay();
+    }
+
+    disableOauth2(e) {
+        e.preventDefault();
+
+        const hide = e.target.checked;
+
+        document.querySelectorAll('.js-hide').forEach(el => el.hidden = hide);
     }
 
     async disableUser(e) {
@@ -98,6 +110,9 @@ export default class Users {
         this.user_config.disable.close.addEventListener('click', this.openOverlay.bind(this));
         this.user_config.disable.cancel.addEventListener('click', this.openOverlay.bind(this));
         this.user_config.disable.form.addEventListener('submit', this.disableUser.bind(this));
+
+        this.oauth2_disabled = document.getElementById('adduser--oauth2-only');
+        this.oauth2_disabled.addEventListener('change', this.disableOauth2.bind(this));
     }
 
     openAddUserOverlay(e) {

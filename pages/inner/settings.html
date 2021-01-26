@@ -149,20 +149,30 @@
                             <label for="adduser--phone">Phone</label>
                             <input class="c-input__field" type="tel" id="adduser--phone" name="phone">
                         </div>
-    
+
                         <div class="c-input">
+                            <label for="select-type">Permission Level</label>
+                            <span class="c-input__custom">
+                                <select class="c-input__field" name="adduser--permission-level" id="select-type">
+                                    <option value="info" selected>Normal</option>
+                                    <option value="admin">Administrator</option>
+                                    <option value="root">Root</option>
+                                </select>
+                                <svg class="c-input__symbol" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z"/></svg>
+                            </span>
+                        </div>
+
+                        <div class="c-toggle__item">
+                            <input class="o-hide-accessible c-option c-option--hidden" type="checkbox" id="adduser--oauth2-only" name="toggle-ms-login">
+                            <label class="c-custom-toggle" for="adduser--oauth2-only">
+                                <span class="c-custom-toggle__fake-input">
+                                </span>OAUTH2 only
+                            </label>
+                        </div>
+
+                        <div class="c-input js-hide">
                             <label for="adduser--username-email">Username</label>
                             <input class="c-input__field" type="text" id="adduser--username-email" name="username-email" required minlength="6">
-                        </div>
-    
-                        <div class="c-input">
-                            <label for="adduser--password">Password</label>
-                            <input class="c-input__field" type="password" id="adduser--password" name="password" required minlength="6">
-                        </div>
-    
-                        <div class="c-input">
-                            <label for="adduser--password-confirm">Confirm password</label>
-                            <input class="c-input__field" type="password" id="adduser--password-confirm" name="password-confirm" required minlength="6">
                         </div>
     
                         <div class="c-buttons">

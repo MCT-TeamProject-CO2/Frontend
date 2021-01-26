@@ -1155,6 +1155,10 @@ body {
 
 /*Component: toggle*/
 
+.c-toggle__item {
+    margin: var(--global-whitespace-md) 0;
+}
+
 .c-toggle-list__item+.c-toggle-list__item {
     margin: var(--global-whitespace-xs) 0;
 }
