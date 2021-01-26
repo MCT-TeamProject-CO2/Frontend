@@ -43,7 +43,7 @@ export const deleteReq = (url, body = '', searchParams = {}, headers = {}, optio
     url = getURL(url);
     urlAddSearchParams(url, searchParams);
 
-    if (!body instanceof FormData && body instanceof Object)
+    if (!(body instanceof FormData) && body instanceof Object)
         body = JSON.stringify(body);
 
     merge(options, {
@@ -87,7 +87,7 @@ export const post = (url, body = '', searchParams = {}, headers = {}, options = 
     url = getURL(url);
     urlAddSearchParams(url, searchParams);
 
-    if (!body instanceof FormData && body instanceof Object)
+    if (!(body instanceof FormData) && body instanceof Object)
         body = JSON.stringify(body);
 
     merge(options, {
@@ -111,7 +111,7 @@ export const put = (url, body = '', searchParams = {}, headers = {}, options = {
     url = getURL(url);
     urlAddSearchParams(url, searchParams);
 
-    if (!body instanceof FormData && body instanceof Object)
+    if (!(body instanceof FormData) && body instanceof Object)
         body = JSON.stringify(body);
 
     merge(options, {
