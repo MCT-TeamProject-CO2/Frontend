@@ -98,9 +98,23 @@ export default class InnerHome {
         });
 
         const floorBtns = document.querySelectorAll('.js-btn-floor');
+        const roomCards = document.querySelectorAll('.js-room');
         floorBtns.forEach(floorBtn => floorBtn.addEventListener('click', this.floorClick.bind(this)));
+        roomCards.forEach(roomCard => roomCard.addEventListener('click', this.roomCardClick.bind(this)));
 
         this.locations = locations;
+    }
+
+    roomCardClick(e) {
+        e.preventDefault();
+
+        let el = e.target;
+        while (!el.classList.contains('js-room'))
+            el = el.parentElement;
+
+        const [location, block, floor, room] = el.dataset.room.split('.');
+
+        this.app.router.navigateInner(`floor?location=${location}&floor=${floor}`);
     }
 
     async run() {
