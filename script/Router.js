@@ -4,6 +4,7 @@ export default class Router {
     _cache = new Map();
     _handlers = new Map();
     _innerHandlers = new Map();
+    _search = null;
 
     constructor(app) {
         this.app = app;
@@ -18,7 +19,7 @@ export default class Router {
     }
 
     get search() {
-        return new URLSearchParams(location.search);
+        return new URLSearchParams(this._search ? this._search : location.search);
     }
 
     /**
@@ -33,7 +34,16 @@ export default class Router {
         return res.text();
     }
 
+    _updateSearch(path) {
+        const split_path = path.split('?');
+
+        this._search = split_path[1];
+        return split_path[0];
+    }
+
     async prepare(path) {
+        path = this._updateSearch(path);
+
         if (this._cache.has(path)) {
             const fileString = this._cache.get(path);
             if (fileString instanceof Promise)
@@ -49,6 +59,8 @@ export default class Router {
     }
 
     async navigate(path) {
+        path = this._updateSearch(path);
+
         document.title = 'AirMonitor | ' + path;
 
         const contents = await this.prepare(path);
@@ -62,13 +74,15 @@ export default class Router {
     }
 
     async navigateInner(path) {
+        path = this._updateSearch(path);
+
         document.title = 'AirMonitor | ' + path;
 
         const contents = await this.prepare('inner/' + path);
 
         const inner = document.querySelector('.c-app__main');
         if (!inner) {
-            window.location = '/#/' + path;
+            window.location = '/#/' + path + this._search;
             location.reload();
 
             console.log('Unable to navigate inner, is the home content loaded?');
