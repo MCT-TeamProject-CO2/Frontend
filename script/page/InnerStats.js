@@ -20,8 +20,8 @@ export default class InnerStats {
         if (!tagString) return this.graph_wrapper.innerHTML = '<p>Please select a room</p>';
 
         const data = await this.app.api.measurements.getDelta(tagString, 10, ['humidity']);
-    
-        this.renderChart("Humidity", data[tagString]);
+
+        this.renderChart("Humidity", data[tagString], tagString);
     }
 
     async getRooms(q = '') {
@@ -29,7 +29,7 @@ export default class InnerStats {
 
         this.datalist.innerHTML = '';
         results.forEach(result => {
-            this.datalist.innerHTML += '<option value="'+ result + '"/>';
+            this.datalist.innerHTML += '<option value="' + result + '"/>';
         });
 
         return results;
@@ -43,39 +43,82 @@ export default class InnerStats {
         if (el.value == -1) {
             this.time.start.parentElement.parentElement.hidden = false;
             this.time.end.parentElement.parentElement.hidden = false;
-        }
-        else {
+        } else {
             this.time.start.parentElement.parentElement.hidden = true;
             this.time.end.parentElement.parentElement.hidden = true;
         }
     }
 
-    renderChart(label, data) {
+    formatTime(time) {
+        return time < 10 ? "0" + time : time;
+    }
+
+    renderChart(label, data, room) {
         if (!data) return this.graph_wrapper.innerHTML = 'There\'s no data available for this room.';
 
-        this.graph_wrapper.innerHTML = `<canvas class="c-chart js-graph-canvas"></canvas>`;
+        this.graph_wrapper.innerHTML = `<canvas class="c-chart__graph js-graph-canvas"></canvas>`;
 
         const labels = [];
         const dataPoints = [];
 
         data.forEach(dataPoint => {
-            labels.push(dataPoint._time);
-            
+            const date = new Date(dataPoint._time);
+            if (date.getDay() - (date.getDay() - 1) > 0)
+                var labelString = `${this.formatTime(date.getHours())}:${this.formatTime(date.getMinutes())}`;
+            else {
+                var labelString = `${this.formatTime(date.getDate())}/${this.formatTime(date.getMonth()+1)}/${date.getFullYear()}`;
+            }
+
+            labels.push(labelString);
+
             dataPoints.push(dataPoint._value);
         });
 
         const ctx = document.querySelector('.js-graph-canvas');
         this.chart = new Chart(ctx, {
             type: 'line',
-
             data: {
-                labels,
+                labels: labels,
+                responsive: true,
+                maintainAspectRatio: true,
                 datasets: [{
-                    label,
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: dataPoints
+                    label: label,
+                    data: dataPoints,
+                    pointBackgroundColor: "#44c8f5",
+                    pointBorderWidth: 0,
+                    backgroundColor: "#44c8f533",
+                    borderColor: "#44c8f5"
                 }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: room,
+                    fontColor: "var(--global-color-background)",
+                    fontSize: "16",
+                    padding: 8
+                },
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontFamily: "Open Sans",
+                            fontStyle: "400",
+                            fontSize: 14
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontFamily: "Open Sans",
+                            fontStyle: "400",
+                            fontSize: 14
+                        }
+                    }]
+                }
             }
         });
 
