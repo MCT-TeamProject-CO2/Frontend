@@ -138,10 +138,18 @@ export default class Plan {
                 resetHighlight();
                 showRoom(room.dataset.room);
             });
+
+            setFill(room.dataset.room);
     
             room.addEventListener("click", () => { centerOnRoom(room.dataset.room); });
         }
     
+        function setFill(roomName) {
+            const room = floorplan.querySelector(`svg [data-room = "${roomName}"]`);
+            room.style.fill = 'var(--global-color-blue-howest)';
+            room.style.fillOpacity = 0;
+        }
+
         //move to room on click
         function centerOnRoom(roomName) {
             const room = floorplan.querySelector(`[data-room = "${roomName}"]`);
@@ -158,7 +166,7 @@ export default class Plan {
             resetHighlight();
             const room = floorplan.querySelector(`svg [data-room = "${roomName}"]`);
             room.classList.add("room-hover");
-            room.style.fillOpacity = 0.1;
+            room.style.fillOpacity = 0.5;
         }
     }
 
