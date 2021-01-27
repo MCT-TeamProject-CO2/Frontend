@@ -676,12 +676,6 @@ body {
     width: 100%;
 }
 
-@media (min-width: 768px) {
-    .c-floorplan {
-        height: 16rem;
-    }
-}
-
 @media (min-width: 1024px) {
     .c-floorplan {
         min-height: 100%;
@@ -1434,8 +1428,8 @@ body {
     display: none;
 }
 
-@media(min-width: 768px) {
-    .u-display-block-bp2 {
+@media(min-width: 1440px) {
+    .u-display-block-bp4 {
         display: block;
     }
 }
