@@ -146,6 +146,7 @@ export default class InnerSettings {
 
         e.target.reset();
 
+        this.user = await this.app.api.getUser();
         this.showUserSettings();
     }
 }
