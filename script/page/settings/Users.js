@@ -42,6 +42,17 @@ export default class Users {
         this.openOverlay();
     }
 
+    async deleteUser(e) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        const err = await this.app.api.users.delete(this._activeUser.uid, formData.get('verify-pass'));
+
+        if (err)
+            this.app.alerts.pushPopup('User Deletion Failure', err);
+    }
+
     disableOauth2(e) {
         e.preventDefault();
 
@@ -89,12 +100,17 @@ export default class Users {
             },
             disable: {
                 popup: document.querySelector('.js-popup-usersconfig--disable-enable'),
-                wrapper: document.querySelector('.js-popup-usersconfig--disable-enable .c-popup__content'),
                 close: document.querySelector('.js-popup-usersconfig--disable-enable .c-popup-close'),
                 cancel: document.querySelector('.js-popup-usersconfig--disable-enable .c-button--grey'),
                 submitBtn: document.querySelector('.js-popup-usersconfig--disable-enable form .c-button--red'),
                 title: document.querySelector('.js-popup-usersconfig--disable-enable .c-card__title'),
                 form: document.querySelector('.js-popup-usersconfig--disable-enable form')
+            },
+            delete: {
+                popup: document.querySelector('.js-popup-usersconfig--delete'),
+                close: document.querySelector('.js-popup-usersconfig--delete .c-popup-close'),
+                cancel: document.querySelector('.js-popup-usersconfig--delete .c-button--grey'),
+                form: document.querySelector('.js-popup-usersconfig--delete form')
             }
         };
 
@@ -103,6 +119,7 @@ export default class Users {
             this.user_config.reset.popup.hidden = true;
             this.user_config.disable.popup.hidden = true;
             this.user_config.base.popup.hidden = true;
+            this.user_config.delete.popup.hidden = true;
         });
 
         this.user_config.base.add.addEventListener('click', this.openAddUserOverlay.bind(this));
@@ -119,6 +136,10 @@ export default class Users {
         this.user_config.disable.cancel.addEventListener('click', this.openOverlay.bind(this));
         this.user_config.disable.form.addEventListener('submit', this.disableUser.bind(this));
 
+        this.user_config.delete.close.addEventListener('click', this.openOverlay.bind(this));
+        this.user_config.delete.cancel.addEventListener('click', this.openOverlay.bind(this));
+        this.user_config.delete.form.addEventListener('submit', this.deleteUser.bind(this));
+
         this.oauth2_disabled = document.getElementById('adduser--oauth2-only');
         this.oauth2_disabled.addEventListener('change', this.disableOauth2.bind(this));
     }
@@ -131,6 +152,17 @@ export default class Users {
         this.user_config.reset.popup.hidden = true;
         this.user_config.disable.popup.hidden = true;
         this.user_config.base.popup.hidden = true;
+        this.user_config.delete.popup.hidden = true;
+    }
+
+    openDeleteUserOverlay(e) {
+        e?.preventDefault();
+
+        this.user_config.add.popup.hidden = true;
+        this.user_config.reset.popup.hidden = true;
+        this.user_config.disable.popup.hidden = true;
+        this.user_config.base.popup.hidden = true;
+        this.user_config.delete.popup.hidden = false;
     }
 
     openDisableUserOverlay(e) {
@@ -144,6 +176,7 @@ export default class Users {
         this.user_config.reset.popup.hidden = true;
         this.user_config.disable.popup.hidden = false;
         this.user_config.base.popup.hidden = true;
+        this.user_config.delete.popup.hidden = true;
     }
 
     async openOverlay(e) {
@@ -154,6 +187,7 @@ export default class Users {
         this.user_config.reset.popup.hidden = true;
         this.user_config.disable.popup.hidden = true;
         this.user_config.base.popup.hidden = false;
+        this.user_config.delete.popup.hidden = true;
 
         const { success, data } = await this.app.api.users.get();
         if (success)
@@ -169,10 +203,13 @@ export default class Users {
         this.user_config.reset.popup.hidden = false;
         this.user_config.disable.popup.hidden = true;
         this.user_config.base.popup.hidden = true;
+        this.user_config.delete.popup.hidden = true;
     }
 
-    renderUsers(data) {
+    async renderUsers(data) {
         this.user_config.base.wrapper.innerHTML = data.length === 0 ? 'No users found.' : '';
+
+        const isRoot = (await this.app.api.users.me()).permission === 'root';
 
         data.forEach(user => {
             const html = `<div class="c-card u-max-width-sm-bp1" id="${user.uid}">
@@ -180,6 +217,7 @@ export default class Users {
                 <div class="c-card__content">
                     <button class="o-button-reset c-button js-reset-password" type="button">Reset password</button>
                     <button class="o-button-reset c-button ${user.disabled ? '' : 'c-button--red'} js-disable-account" type="button">${user.disabled ? 'Re-enable' : 'Disable'} account</button>
+                    ${isRoot ? '<button class="o-button-reset c-button c-button--red js-delete-account" type="button">Delete account</button>' : ''}
                 </div>
             </div>`;
 
@@ -200,6 +238,14 @@ export default class Users {
 
                 this.openDisableUserOverlay();
             });
+
+            document.querySelector(`#${CSS.escape(user.uid)} .js-delete-account`)?.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                this._activeUser = user;
+
+                this.openDeleteUserOverlay();
+            })
         });
     }
 

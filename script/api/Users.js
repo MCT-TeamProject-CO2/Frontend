@@ -24,6 +24,30 @@ export default class Users {
         }
     }
 
+    async delete(uid, password) {
+        const res = await this.api.delete(this.base + '/delete', {
+            query: { uid },
+            password
+        }, {}, {
+            authorization: this.api.getSession()
+        });
+
+        if (res.ok) return null;
+
+        switch (res.status) {
+            case 400:
+                return 'Empty request body or required properties were missing.';
+        
+            case 403:
+                return 'You do not have permission to make this action';
+
+            case 406:
+                return (await res.json()).message;
+        }
+
+        return 'Unknown error occurred.';
+    }
+
     async disable(uid, toggle) {
         const res = await this.api.put(this.base, {
             query: { uid },
