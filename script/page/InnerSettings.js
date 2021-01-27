@@ -59,6 +59,11 @@ export default class InnerSettings {
 
         document.getElementById('toggle-email').checked = this.user.config.mailNotifications;
         document.getElementById('toggle-sms').checked = this.user.config.smsNotifications;
+
+        if (this.user.type === 'oauth2') {
+            document.querySelectorAll('.js-normal-only').forEach(el => el.hidden = true);
+            document.querySelectorAll('.js-normal-only input').forEach(el => el.disabled = true);
+        }
     }
 
     async refreshPlugs(e) {
