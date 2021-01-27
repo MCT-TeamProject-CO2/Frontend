@@ -103,7 +103,16 @@ export default class InnerSettings {
     async updateUser(e) {
         e.preventDefault();
 
-        let update = { email: this.email.value };
+        const mailNotifications = document.getElementById('toggle-email').checked;
+        const smsNotifications = document.getElementById('toggle-sms').checked;
+
+        let update = {
+            email: this.email.value,
+            config: {
+                mailNotifications,
+                smsNotifications
+            }
+        };
 
         if (this.old_pass.value.length > 6 ||
             this.new_pass.value.length > 6 ||
