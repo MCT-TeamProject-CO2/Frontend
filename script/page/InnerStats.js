@@ -248,7 +248,7 @@ export default class InnerStats {
         const result = await this.app.api.measurements.getDelta(room, 1, ['co2eq_ppm', 'humidity', 'temperature', 'tvoc_ppb'], '2m');
 
         if (!result || !result[room]) {
-            this.room.measurements.innerHTML = '<li><p>No recent data available for this room.</p></li>'
+            this.room.measurements.innerHTML = '<li style="list-style: none"><p>No recent data available for this room.</p></li>'
 
             return;
         }
