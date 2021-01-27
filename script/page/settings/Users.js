@@ -11,21 +11,21 @@ export default class Users {
         const formData = new FormData(e.target);
 
         const currUser = await this.app.api.users.me();
-        if (PermissionLevels.indexOf(currUser.permission) < PermissionLevels.indexOf(formData.get('permission-level')))
+        if (PermissionLevels.indexOf(currUser.permission) < PermissionLevels.indexOf(formData.get('adduser--permission-level')))
             return this.app.alerts.pushPopup('User Creation Failure', 'The permission level selected for the user is higher than your own.')
 
         const userSchema = this.oauth2_disabled.checked
             ? {
                 email: formData.get('email'),
                 type: 'oauth2',
-                permission: formData.get('permission-level')
+                permission: formData.get('adduser--permission-level')
             }
             : {
                 email: formData.get('email'),
                 type: 'normal',
                 username: formData.get('username-email'),
                 password: formData.get('password'),
-                permission: formData.get('permission-level')
+                permission: formData.get('adduser--permission-level')
             };
 
         const phone_number = formData.get('phone');
@@ -39,6 +39,8 @@ export default class Users {
         else
             this.app.alerts.pushPopup('User Created', 'User created successfully!');
 
+        e.target.reset();
+
         this.openOverlay();
     }
 
@@ -51,6 +53,8 @@ export default class Users {
 
         if (err)
             this.app.alerts.pushPopup('User Deletion Failure', err);
+
+        this.openOverlay();
     }
 
     disableOauth2(e) {
@@ -59,6 +63,7 @@ export default class Users {
         const hide = e.target.checked;
 
         document.querySelectorAll('.js-hide').forEach(el => el.hidden = hide);
+        document.querySelectorAll('.js-hide input').forEach(el => el.disabled = hide);
     }
 
     async disableUser(e) {
