@@ -24,10 +24,10 @@ export default class Users {
         }
     }
 
-    async disable(uid) {
+    async disable(uid, toggle) {
         const res = await this.api.put(this.base, {
             query: { uid },
-            update: { disabled: true }
+            update: { disabled: toggle }
         }, {}, {
             authorization: this.api.getSession()
         });

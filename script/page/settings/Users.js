@@ -53,11 +53,11 @@ export default class Users {
     async disableUser(e) {
         e.preventDefault();
 
-        const err = await this.app.api.users.disable(document.getElementById('disable-uuid').value);
+        const err = await this.app.api.users.disable(this._activeUser.uid, !this._activeUser.disabled);
         if (err)
-            this.app.alerts.pushPopup('Disable User Failure', err);
+            this.app.alerts.pushPopup(`${this._activeUser.disabled ? 'Re-enable' : 'Disable'} User Failure`, err);
         else
-            this.app.alerts.pushPopup('Disable User', 'The user\'s account has been disabled.');
+            this.app.alerts.pushPopup(`${this._activeUser.disabled ? 'Re-enable' : 'Disable'} User`, `The user's account has been ${this._activeUser.disabled ? 'enabled' : 'disabled'}.`);
 
         this.openOverlay();
     }
@@ -92,6 +92,8 @@ export default class Users {
                 wrapper: document.querySelector('.js-popup-usersconfig--disable-enable .c-popup__content'),
                 close: document.querySelector('.js-popup-usersconfig--disable-enable .c-popup-close'),
                 cancel: document.querySelector('.js-popup-usersconfig--disable-enable .c-button--grey'),
+                submitBtn: document.querySelector('.js-popup-usersconfig--disable-enable form .c-button--red'),
+                title: document.querySelector('.js-popup-usersconfig--disable-enable .c-card__title'),
                 form: document.querySelector('.js-popup-usersconfig--disable-enable form')
             }
         };
@@ -134,6 +136,9 @@ export default class Users {
     openDisableUserOverlay(e) {
         if (e) { e.preventDefault(); }
 
+        this.user_config.disable.submitBtn.classList.toggle('c-button--red', !this._activeUser.disabled);
+        this.user_config.disable.submitBtn.innerHTML = this._activeUser.disabled ? 'Enable' : 'Disable';
+        this.user_config.disable.title.innerText = this._activeUser.disabled ? 'Re-enable user' : 'Disable user';
 
         this.user_config.add.popup.hidden = true;
         this.user_config.reset.popup.hidden = true;
@@ -174,7 +179,7 @@ export default class Users {
                 <p class="c-card__title">${user.email}</p>
                 <div class="c-card__content">
                     <button class="o-button-reset c-button js-reset-password" type="button">Reset password</button>
-                    <button class="o-button-reset c-button c-button--red js-disable-account" type="button">Disable account</button>
+                    <button class="o-button-reset c-button ${user.disabled ? '' : 'c-button--red'} js-disable-account" type="button">${user.disabled ? 'Re-enable' : 'Disable'} account</button>
                 </div>
             </div>`;
 
@@ -183,7 +188,7 @@ export default class Users {
             document.querySelector(`#${CSS.escape(user.uid)} .js-reset-password`).addEventListener('click', (e) => {
                 e.preventDefault();
 
-                document.getElementById('reset-uuid').value = user.uid;
+                this._activeUser = user;
 
                 this.openUserResetOverlay();
             });
@@ -191,7 +196,7 @@ export default class Users {
             document.querySelector(`#${CSS.escape(user.uid)} .js-disable-account`).addEventListener('click', (e) => {
                 e.preventDefault();
 
-                document.getElementById('disable-uuid').value = user.uid;
+                this._activeUser = user;
 
                 this.openDisableUserOverlay();
             });
@@ -201,7 +206,7 @@ export default class Users {
     async resetUser(e) {
         e.preventDefault();
 
-        const err = await this.app.api.users.resetPassword(document.getElementById('reset-uuid').value);
+        const err = await this.app.api.users.resetPassword(this._activeUser.uid);
         if (err)
             this.app.alerts.pushPopup('Reset User Failure', err);
         else
