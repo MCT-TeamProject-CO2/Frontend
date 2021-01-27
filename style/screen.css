@@ -1382,6 +1382,9 @@ body {
     .u-width-half-bp3 {
         width: 50%;
     }
+    .u-width-md-bp3 {
+        width: 20rem;
+    }
 }
 
 .u-height-max {
