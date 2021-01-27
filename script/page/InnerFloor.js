@@ -53,7 +53,7 @@ export default class InnerFloor {
     }
 
     renderRooms(rooms) {
-        this.cards.innerHTML = '';
+        this.cards.innerHTML = Object.keys(rooms).length > 0 ? '' : 'No sensors found on this floor.';
 
         for (const tagString in rooms) {
             if (Object.hasOwnProperty.call(rooms, tagString)) {
