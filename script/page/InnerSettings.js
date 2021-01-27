@@ -56,6 +56,9 @@ export default class InnerSettings {
     showUserSettings() {
         this.email.value = this.user.email;
         this.phone.value = this.user.phone ? this.user.phone : '';
+
+        document.getElementById('toggle-email').checked = this.user.config.mailNotifications;
+        document.getElementById('toggle-sms').checked = this.user.config.smsNotifications;
     }
 
     async refreshPlugs(e) {
