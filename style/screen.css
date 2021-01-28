@@ -1,4 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@font-face {
+    src: url("../fonts/Segoe\ UI.woff");
+    font-family: 'Segoe UI import';
+    font-weight: 400;
+}
+
+@font-face {
+    src: url("../fonts/Segoe\ UI\ Bold.woff");
+    font-family: 'Segoe UI import';
+    font-weight: 600;
+}
+
 :root {
     /*Colors*/
     --global-color-light: #ffffff;
@@ -976,7 +988,7 @@ body {
     padding: 0 12px;
     display: flex;
     align-items: center;
-    font-family: "Segoe UI";
+    font-family: "Segoe UI import";
     font-weight: 600;
     font-size: 15px;
     line-height: 15px;
