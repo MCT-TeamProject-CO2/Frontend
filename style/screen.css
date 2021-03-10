@@ -455,6 +455,12 @@ body {
 }
 
 .c-main-section__title {
+    display: flex;
+}
+
+.c-main-section__title h2 {
+    flex-grow: 1;
+
     font-size: var(--global-textsize-xl);
     color: var(--global-color-accent);
 }
@@ -546,6 +552,14 @@ body {
     min-width: 12rem;
     width: 100%;
     height: fit-content;
+}
+
+.c-card--compact .c-measurements__item p {
+    margin: 0;
+}
+
+.c-card--compact > .c-card__footer {
+    display: none;
 }
 
 .c-card__title {
@@ -1180,6 +1194,7 @@ body {
     --local-toggle-btn-background: var(--global-color-background);
     width: 3rem;
     height: 1.5rem;
+    margin: 0 var(--global-whitespace-sm);
     border-radius: 45px;
     background-color: var(--local-toggle-background);
     transition: all var(--global-transitionTiming-alpha);

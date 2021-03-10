@@ -6,6 +6,9 @@ export default class InnerHome {
     domLookup() {
         this.location_wrapper = document.querySelector('.js-locations');
         this.alerts_wrapper = document.querySelector('.js-alerts');
+
+        this.compact_mode = document.getElementById('compact-mode');
+        this.compact_mode.addEventListener('change', e => this.onCompactModeToggle(e.target.checked));
     }
 
     floorClick(e) {
@@ -36,6 +39,13 @@ export default class InnerHome {
         const data = await this.app.api.locations.getAll();
 
         this.renderLocations(data);
+    }
+
+    onCompactModeToggle(toggle = false) {
+        this.compact_mode.checked = toggle;
+        localStorage.setItem('compact-mode', toggle);
+
+        document.querySelectorAll('.js-room').forEach(e => e.classList[!toggle ? 'remove' : 'add']('c-card--compact'));
     }
 
     renderAlerts(alerts) {
@@ -122,5 +132,8 @@ export default class InnerHome {
 
         if (await this.loadAlerts())
             this.loadLocations();
+
+        const compactMode = localStorage.getItem('compact-mode');
+        this.onCompactModeToggle(compactMode ? compactMode : undefined);
     }
 }
