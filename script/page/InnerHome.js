@@ -9,6 +9,7 @@ export default class InnerHome {
 
         this.compact_mode = document.getElementById('compact-mode');
         this.compact_mode.addEventListener('change', e => this.onCompactModeToggle(e.target.checked));
+        this.compact_mode.checked = localStorage.getItem('compact-mode') == 'true' ? true : false;
     }
 
     floorClick(e) {
@@ -56,7 +57,7 @@ export default class InnerHome {
         alerts.forEach(alert => {
             const date = new Date(alert.updatedAt);
 
-            const html = `<div class="c-card c-card--clickable u-width-fit-content u-width-max-bp3 js-room room-has-alert ${alert.code == 1 ? 'room-has-alert--orange' : ''}" data-room="${alert.tagString}">
+            const html = `<div class="c-card ${this.compact_mode.checked ? 'c-card--compact' : ''} c-card--clickable u-width-fit-content u-width-max-bp3 js-room room-has-alert ${alert.code == 1 ? 'room-has-alert--orange' : ''}" data-room="${alert.tagString}">
                 <p class="c-card__title">${alert.tagString}</p>
                 <ul class="o-list c-card__content c-measurements ">
                     <li class="c-measurements__item ">
@@ -132,8 +133,5 @@ export default class InnerHome {
 
         if (await this.loadAlerts())
             this.loadLocations();
-
-        const compactMode = localStorage.getItem('compact-mode');
-        this.onCompactModeToggle(compactMode ? compactMode : undefined);
     }
 }
